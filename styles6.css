@@ -1,0 +1,263 @@
+/* ------------ Reset & Base Tokens ------------ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root{
+  /* Core colors (inspired by Leona_50) */
+  --bg: #2B283D;          /* deep plum */
+  --panel: #1F1B2E;       /* card background */
+  --text: #F4EDFF;        /* soft off-white with lilac cast */
+  --muted: #C9C2E6;       /* muted lilac */
+  --grad-start: #D7A9EB;  /* lilac */
+  --grad-end: #6E57A6;    /* purple */
+
+  /* Layout */
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --shadow-outer: 0 26px 70px rgba(0,0,0,.46);
+  --shadow-inset: 0 0 0 1px rgba(215,169,235,.10) inset;
+
+  /* Typography */
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif;
+}
+
+/* ------------ Document Base ------------ */
+html, body { min-height: 100%; }
+body{
+  font-family: var(--font);
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* FAR layer: softer, smaller crystals — low contrast */
+body::before{
+  content:"";
+  position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    /* soft bloom glows */
+    radial-gradient(220px 140px at 12% 22%, rgba(215,169,235,.12), transparent 60%),
+    radial-gradient(220px 160px at 86% 18%, rgba(110,87,166,.12), transparent 60%),
+
+    /* crystals (far): conic wedges */
+    conic-gradient(from 10deg at 8% 30%,
+      rgba(215,169,235,0) 0 20deg,
+      rgba(215,169,235,.35) 20deg 55deg,
+      rgba(110,87,166,.30) 55deg 95deg,
+      rgba(234,220,251,.12) 95deg 120deg,
+      rgba(110,87,166,0) 120deg 360deg),
+    conic-gradient(from -22deg at 26% 48%,
+      rgba(215,169,235,0) 0 18deg,
+      rgba(215,169,235,.30) 18deg 64deg,
+      rgba(128,106,198,.28) 64deg 108deg,
+      rgba(255,255,255,.08) 108deg 130deg,
+      rgba(110,87,166,0) 130deg 360deg),
+    conic-gradient(from 6deg at 44% 20%,
+      rgba(215,169,235,0) 0 22deg,
+      rgba(215,169,235,.32) 22deg 70deg,
+      rgba(110,87,166,.28) 70deg 112deg,
+      rgba(255,255,255,.07) 112deg 132deg,
+      rgba(110,87,166,0) 132deg 360deg),
+    conic-gradient(from -15deg at 66% 34%,
+      rgba(215,169,235,0) 0 24deg,
+      rgba(215,169,235,.33) 24deg 67deg,
+      rgba(110,87,166,.29) 67deg 110deg,
+      rgba(255,255,255,.07) 110deg 132deg,
+      rgba(110,87,166,0) 132deg 360deg),
+    conic-gradient(from 18deg at 82% 42%,
+      rgba(215,169,235,0) 0 18deg,
+      rgba(215,169,235,.30) 18deg 60deg,
+      rgba(110,87,166,.28) 60deg 106deg,
+      rgba(255,255,255,.06) 106deg 126deg,
+      rgba(110,87,166,0) 126deg 360deg),
+
+    /* lower half scatter */
+    conic-gradient(from -12deg at 18% 76%,
+      rgba(215,169,235,0) 0 20deg,
+      rgba(215,169,235,.32) 20deg 60deg,
+      rgba(110,87,166,.28) 60deg 108deg,
+      rgba(255,255,255,.06) 108deg 130deg,
+      rgba(110,87,166,0) 130deg 360deg),
+    conic-gradient(from 14deg at 42% 84%,
+      rgba(215,169,235,0) 0 22deg,
+      rgba(215,169,235,.33) 22deg 68deg,
+      rgba(110,87,166,.28) 68deg 112deg,
+      rgba(255,255,255,.07) 112deg 132deg,
+      rgba(110,87,166,0) 132deg 360deg),
+    conic-gradient(from -20deg at 68% 78%,
+      rgba(215,169,235,0) 0 18deg,
+      rgba(215,169,235,.32) 18deg 58deg,
+      rgba(110,87,166,.28) 58deg 104deg,
+      rgba(255,255,255,.06) 104deg 126deg,
+      rgba(110,87,166,0) 126deg 360deg),
+    conic-gradient(from 8deg at 86% 86%,
+      rgba(215,169,235,0) 0 18deg,
+      rgba(215,169,235,.30) 18deg 60deg,
+      rgba(110,87,166,.27) 60deg 104deg,
+      rgba(255,255,255,.06) 104deg 124deg,
+      rgba(110,87,166,0) 124deg 360deg);
+  background-blend-mode: screen, screen, normal, normal, normal, normal, normal, normal, normal, normal, normal;
+  opacity: .34;
+  filter: saturate(105%);
+}
+
+/* NEAR layer: larger, crisper facets with subtle “sparkle” lines */
+body::after{
+  content:"";
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    /* vertical facet highlights */
+    linear-gradient(90deg, transparent 0 48%, rgba(234,220,251,.10) 48% 52%, transparent 52%) 10% 62% / 10% 30% no-repeat,
+    linear-gradient(90deg, transparent 0 49%, rgba(234,220,251,.10) 49% 51%, transparent 51%) 55% 68% / 12% 34% no-repeat,
+    linear-gradient(90deg, transparent 0 49%, rgba(234,220,251,.10) 49% 51%, transparent 51%) 82% 64% / 10% 32% no-repeat,
+
+    /* big near crystals */
+    conic-gradient(from 6deg at 14% 66%,
+      rgba(215,169,235,0) 0 16deg,
+      rgba(215,169,235,.45) 16deg 58deg,
+      rgba(110,87,166,.42) 58deg 104deg,
+      rgba(255,255,255,.10) 104deg 122deg,
+      rgba(110,87,166,0) 122deg 360deg),
+    conic-gradient(from -10deg at 38% 64%,
+      rgba(215,169,235,0) 0 18deg,
+      rgba(215,169,235,.46) 18deg 64deg,
+      rgba(110,87,166,.43) 64deg 112deg,
+      rgba(255,255,255,.10) 112deg 132deg,
+      rgba(110,87,166,0) 132deg 360deg),
+    conic-gradient(from 12deg at 62% 66%,
+      rgba(215,169,235,0) 0 20deg,
+      rgba(215,169,235,.47) 20deg 66deg,
+      rgba(110,87,166,.44) 66deg 116deg,
+      rgba(255,255,255,.11) 116deg 136deg,
+      rgba(110,87,166,0) 136deg 360deg),
+    conic-gradient(from -8deg at 86% 68%,
+      rgba(215,169,235,0) 0 16deg,
+      rgba(215,169,235,.46) 16deg 58deg,
+      rgba(110,87,166,.42) 58deg 106deg,
+      rgba(255,255,255,.10) 106deg 126deg,
+      rgba(110,87,166,0) 126deg 360deg);
+  background-blend-mode: screen, screen, screen, normal, normal, normal, normal;
+  opacity: .45;
+}
+
+/* =========================================================
+   Layout & Components
+   ========================================================= */
+main{ max-width: 1200px; margin: 0 auto; padding: 48px 20px; position: relative; }
+
+/* Hero */
+.hero{
+  position: relative; overflow: hidden;
+  border-radius: var(--radius-lg);
+  padding: 88px 40px 72px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015)), var(--panel);
+  border: 1px solid rgba(255,255,255,.06);
+  box-shadow: var(--shadow-inset), var(--shadow-outer);
+}
+
+.hero h1{
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 900; letter-spacing: .03em; line-height: 1.1;
+  background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 0 24px rgba(215,169,235,.24);
+}
+
+.tagline{
+  font-size: 18px; color: var(--muted); margin-bottom: 18px; font-weight: 500;
+}
+
+.profile-photo{
+  width: 128px; height: 128px; border-radius: 50%; object-fit: cover;
+  display: block; margin: 0 auto 20px;
+  border: 1px solid rgba(255,255,255,.18);
+  box-shadow: 0 0 40px rgba(215,169,235,.25);
+}
+
+/* Buttons / Links */
+.aws-link, .cta-button{
+  display: inline-block; border: none; cursor: pointer;
+  background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
+  color: #fff; text-decoration: none;
+  padding: 12px 24px; border-radius: var(--radius-md); font-weight: 600; font-size: 16px;
+  box-shadow: 0 10px 28px rgba(110,87,166,.30);
+  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+  margin-top: 1rem;
+}
+.aws-link:hover, .cta-button:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(215,169,235,.38); }
+.aws-link:active, .cta-button:active{ transform: translateY(0); opacity: .92; }
+
+/* Fun Facts */
+.fun-facts{
+  position: relative; border-radius: var(--radius-lg); padding: 40px; margin: 40px 0;
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015)), var(--panel);
+  border: 1px solid rgba(255,255,255,.06);
+  box-shadow: var(--shadow-inset), var(--shadow-outer);
+}
+.fun-facts h3{
+  text-align: left; font-size: clamp(24px, 3vw, 32px); font-weight: 800; letter-spacing: .01em;
+  background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin-bottom: 28px;
+}
+.facts-grid{ display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+
+.fact-card{
+  position: relative; padding: 22px; border-radius: var(--radius-md);
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.08);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.fact-card::before{
+  content:""; position: absolute; right: 16px; top: 16px; width: 22px; height: 22px; border-radius: 6px;
+  background: linear-gradient(90deg, var(--grad-start), var(--grad-end)); opacity: .75;
+  filter: drop-shadow(0 0 8px rgba(215,169,235,.6));
+}
+.fact-card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(215,169,235,.45);
+  box-shadow: 0 10px 26px rgba(0,0,0,.45);
+}
+.fact-card h4{ font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+.fact-card p{ color: var(--muted); font-size: 17px; }
+.fact-card a{ color: var(--grad-end); text-decoration: none; }
+.fact-card a:hover{ text-decoration: underline; }
+
+/* AWS Journey / Generic Panel */
+.aws-journey{
+  background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015)), var(--panel);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius-lg); padding: 40px; text-align: center;
+  box-shadow: var(--shadow-inset), var(--shadow-outer);
+  position: relative; overflow: hidden;
+}
+.aws-journey h3{
+  font-size: clamp(24px, 3vw, 32px); font-weight: 800; letter-spacing: .01em;
+  background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin-bottom: 14px;
+}
+.aws-journey p{ font-size: 16px; color: var(--muted); margin: 0 auto 28px; max-width: 640px; }
+
+/* Footer */
+footer{ text-align: center; padding: 40px 20px; color: var(--muted); font-size: 14px; opacity: .95; }
+footer a{ color: var(--grad-start); }
+
+/* =========================================================
+   Utilities
+   ========================================================= */
+.center { text-align: center; }
+.hidden { display: none !important; }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 768px){
+  main{ padding: 24px 16px; }
+  .hero{ padding: 64px 20px 56px; }
+  .profile-photo{ width: 108px; height: 108px; }
+  .fun-facts, .aws-journey{ padding: 24px; }
+}
+

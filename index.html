@@ -13,6 +13,9 @@
             <img src="profile.png" alt="Your Name" class="profile-photo">
             <h1>VixTheWiz</h1>
             <p class="tagline">Cloud Builder & AWS Enthusiast</p>
+            <p class="scroll-link">
+                <a href="#league-lookup">Try my League Data Lookup ↓</a>
+            </p>
             <a href="https://builder.aws.com/community/@vixthewiz" target="_blank" class="aws-link">AWS Builder Center Profile</a>
         </section>
 
@@ -41,7 +44,7 @@
         </section>
 
         <!-- LEAGUE DATA LOOKUP SECTION -->
-        <section class="league-lookup">
+        <section id="league-lookup" class="league-lookup">
             <h3>League Data Lookup</h3>
             <p>Enter a Riot ID to see their level and top champions!</p>
     
@@ -347,6 +350,19 @@ async function renderResults(data){
     grid.appendChild(div);
   });
 }
+</script>
+<script>
+// Smooth scroll for all same-page links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const targetId = a.getAttribute('href').slice(1);
+    const targetEl = document.getElementById(targetId);
+    if (targetEl) {
+      e.preventDefault();
+      targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
 </script>
 
 </body>

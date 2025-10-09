@@ -421,3 +421,16 @@ footer a{ color: var(--grad-start); }
 .league-lookup .champion-card p { margin: 0; }
 .league-lookup .champion-card p + p { margin-top: 2px; }
 
+.league-lookup .champions-grid{ gap:16px }
+.league-lookup .champion-card{
+  display:grid;
+  grid-template-columns: 64px 1fr;
+  gap:12px;
+  align-items:center;
+}
+.league-lookup .champion-card .champ-icon{
+  border-radius:8px;
+  box-shadow:0 6px 16px rgba(0,0,0,.35);
+}
+.league-lookup .champion-card p{ margin:0 }
+.league-lookup .champion-card p + p{ margin-top:2px }

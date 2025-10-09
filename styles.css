@@ -176,6 +176,27 @@ main{ max-width: 1200px; margin: 0 auto; padding: 48px 20px; position: relative;
   box-shadow: 0 0 40px rgba(215,169,235,.25);
 }
 
+.scroll-link {
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.scroll-link a {
+  color: var(--grad-start);
+  text-decoration: none;
+  font-weight: 600;
+  background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  cursor: pointer;
+  transition: opacity .2s ease;
+}
+
+.scroll-link a:hover {
+  opacity: .8;
+}
+
 /* Buttons / Links */
 .aws-link, .cta-button{
   display: inline-block; border: none; cursor: pointer;

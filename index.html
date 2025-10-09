@@ -206,6 +206,112 @@
         }, 10000);
     }
 </script>
+<script>
+/* ========= DDragon champion map + images (cached) ========= */
+(function(){
+  const DAY = 24*60*60*1000;
+
+  // Expose a single global you can await anywhere
+  window.CHAMP = {
+    version: null,
+    byId: {},       // e.g. {103:"Ahri"}
+    slugById: {},   // e.g. {103:"Ahri"}  // used for image filenames
+    ready: null     // Promise that resolves when map is loaded
+  };
+
+  function setCache(key, value, ttlMs){
+    sessionStorage.setItem(key, JSON.stringify({v:value, t:Date.now(), ttl:ttlMs||DAY*7}));
+  }
+  function getCache(key){
+    try{
+      const raw = sessionStorage.getItem(key);
+      if(!raw) return null;
+      const {v,t,ttl} = JSON.parse(raw);
+      if(Date.now() - t > (ttl||DAY*7)) return null;
+      return v;
+    }catch(_){ return null; }
+  }
+
+  async function getLatestVersion(){
+    const cached = getCache('dd_version');
+    if (cached) return cached;
+    try{
+      const r = await fetch('https://ddragon.leagueoflegends.com/api/versions.json', {cache:'no-store'});
+      const arr = await r.json();
+      const latest = Array.isArray(arr) && arr.length ? arr[0] : 'latest';
+      setCache('dd_version', latest, DAY); // refresh daily
+      return latest;
+    }catch(_){
+      return 'latest'; // fallback; DDragon will redirect if needed
+    }
+  }
+
+  async function getChampionMap(version){
+    const key = `dd_champmap_${version}`;
+    const cached = getCache(key);
+    if (cached) return cached;
+
+    const r = await fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`, {cache:'no-store'});
+    const data = await r.json(); // shape: { data: { Ahri: { key:"103", id:"Ahri", name:"Ahri", ... } } }
+    const byId = {};
+    const slugById = {};
+    for (const obj of Object.values(data.data)){
+      const idNum = parseInt(obj.key, 10);
+      byId[idNum] = obj.name;   // display name
+      slugById[idNum] = obj.id; // slug used in image filenames
+    }
+    const packed = { byId, slugById };
+    setCache(key, packed, DAY*7);
+    return packed;
+  }
+
+  window.CHAMP.ready = (async ()=>{
+    const ver = await getLatestVersion();
+    const { byId, slugById } = await getChampionMap(ver);
+    window.CHAMP.version = ver;
+    window.CHAMP.byId = byId;
+    window.CHAMP.slugById = slugById;
+  })();
+})();
+</script>
+<script>
+async function renderResults(data){
+  // Ensure champion map is loaded
+  if (window.CHAMP?.ready) { await window.CHAMP.ready; }
+
+  const grid = document.querySelector('.champions-grid');
+  const card = document.querySelector('.summoner-card');
+  if (!grid) return;
+
+  // Summoner card (keeps your current structure)
+  if (card && data?.summoner){
+    card.innerHTML = `
+      <h5>${data.summoner.name}</h5>
+      <p>Level ${data.summoner.level ?? '—'}</p>
+    `;
+  }
+
+  // Champions
+  grid.innerHTML = '';
+  const champs = data?.topChampions || [];
+  champs.forEach(c => {
+    const name = (window.CHAMP.byId && window.CHAMP.byId[c.championId]) || `ID ${c.championId}`;
+    const slug = (window.CHAMP.slugById && window.CHAMP.slugById[c.championId]) || null;
+    const ver  = window.CHAMP.version || 'latest';
+    const img  = slug ? `https://ddragon.leagueoflegends.com/cdn/${ver}/img/champion/${slug}.png` : '';
+
+    const div = document.createElement('div');
+    div.className = 'champion-card';
+    div.innerHTML = `
+      ${img ? `<img class="champ-icon" src="${img}" alt="${name}" width="64" height="64" loading="lazy">` : ''}
+      <p><strong>${name}</strong></p>
+      <p>Level ${c.championLevel}</p>
+      <p>${(c.championPoints || 0).toLocaleString()} pts</p>
+    `;
+    grid.appendChild(div);
+  });
+}
+</script>
 
 </body>
 </html>

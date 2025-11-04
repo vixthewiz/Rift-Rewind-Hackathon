@@ -29,7 +29,7 @@
                 </div>
                 <div class="fact-card">
                     <h4>🎯 Learning Goal</h4>
-                    <p>Building my skills one AWS service at a time - Lambda, Systems manager and beyond!</p>
+                    <p>Building my skills one AWS service at a time - Amazon Bedrock, SageMaker, Strands Agents</p>
                 </div>
                 <div class="fact-card">
                     <h4>💡 Fun Project</h4>
@@ -165,8 +165,6 @@ function showMessage(text, type) {
 
 <script>
 async function renderResultsSimple(payload){
-  console.log("[RR] renderResultsSimple() called with payload:", payload);
-
   const wrap    = document.getElementById('summoner-results');
   const info    = document.getElementById('summoner-info');
   const mastery = document.getElementById('champion-mastery');
@@ -192,7 +190,6 @@ async function renderResultsSimple(payload){
     <div class="summoner-card">
       <h5>${escapeHtml(s.name || 'Unknown Summoner')}</h5>
       <p>Level: ${s.level ?? s.summonerLevel ?? '—'}</p>
-      ${s.puuid ? `<p class="mono">PUUID: ${escapeHtml(s.puuid)}</p>` : ''}
     </div>
   `;
 
@@ -200,10 +197,7 @@ async function renderResultsSimple(payload){
   if (!champs.length){
     console.warn("[RR] No topChampions found in payload.");
     mastery.innerHTML = `
-      <div class="subtle" style="padding:8px 0">No champion mastery data returned.</div>
-      <details style="margin-top:8px"><summary>Debug: show raw payload</summary>
-        <pre style="white-space:pre-wrap">${escapeHtml(JSON.stringify(payload, null, 2))}</pre>
-      </details>`;
+      <div class="subtle" style="padding:8px 0">No champion mastery data returned.</div>`;
     return;
   }
 
@@ -248,11 +242,7 @@ async function renderResultsSimple(payload){
 
   mastery.innerHTML = `
     <h5>Top Champions</h5>
-    <div class="champions-grid">${cards}</div>
-    <details style="margin-top:8px"><summary>Debug: show raw payload</summary>
-      <pre style="white-space:pre-wrap">${escapeHtml(JSON.stringify(payload, null, 2))}</pre>
-    </details>
-  `;
+    <div class="champions-grid">${cards}</div>`;
 }
 
 function escapeHtml(s){

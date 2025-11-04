@@ -449,9 +449,4 @@ footer a{ color: var(--grad-start); }
   gap:12px;
   align-items:center;
 }
-.league-lookup .champion-card .champ-icon{
-  border-radius:8px;
-  box-shadow:0 6px 16px rgba(0,0,0,.35);
-}
-.league-lookup .champion-card p{ margin:0 }
-.league-lookup .champion-card p + p{ margin-top:2px }
+

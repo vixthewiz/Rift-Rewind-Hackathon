@@ -93,227 +93,173 @@
         <p>&copy; 2025 Victoria @VixTheWiz. Built with ❤️ on AWS</p>
     </footer>
     
-    <script>
-    // League Data Lookup - Calls Riot API via Lambda
-    const RIOT_API_URL = 'https://drkwtz22yumgqdhn2u5xa2knie0vijnw.lambda-url.us-east-1.on.aws/'; // Lambda Function URL
-    
-    document.addEventListener('DOMContentLoaded', function() {
-        const lookupBtn = document.getElementById('lookup-btn');
-        const summonerNameInput = document.getElementById('summoner-name');
-        const regionSelect = document.getElementById('region');
-        
-        lookupBtn.addEventListener('click', async function() {
-            const summonerName = summonerNameInput.value.trim();
-            const region = regionSelect.value;
-            const messageDiv = document.getElementById('lookup-message');
-            const resultsDiv = document.getElementById('summoner-results');
-            
-            if (!summonerName) {
-                showMessage('Please enter a Riot ID', 'error');
-                return;
-            }
-            
-            if (!summonerName.includes('#')) {
-                showMessage('Please use Riot ID format: GameName#TAG', 'error');
-                return;
-            }
-            
-            // Show loading state
-            lookupBtn.textContent = 'Looking up...';
-            lookupBtn.disabled = true;
-            messageDiv.style.display = 'none';
-            resultsDiv.style.display = 'none';
-            
-            try {
-                const response = await fetch(RIOT_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        summonerName: summonerName,
-                        region: region
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    await renderResults(data);
-                    document.getElementById('summoner-results').style.display = 'block';
-                    showMessage('Summoner found!', 'success');
-                } else {
-                    showMessage(data.error || 'Failed to fetch summoner data', 'error');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showMessage('Network error. Please try again.', 'error');
-            }
-            
-            // Reset button
-            lookupBtn.textContent = 'Look Up Summoner';
-            lookupBtn.disabled = false;
-        });
-        
-        // Enter key support
-        summonerNameInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                lookupBtn.click();
-            }
-        });
-    });
-    
-       function showMessage(text, type) {
-        const messageDiv = document.getElementById('lookup-message');
-        messageDiv.textContent = text;
-        messageDiv.className = `lookup-message ${type}`;
-        messageDiv.style.display = 'block';
-        
-        // Auto-hide after 10 seconds
-        setTimeout(() => {
-            messageDiv.style.display = 'none';
-        }, 10000);
+<script>    
+// League Data Lookup - Calls Riot API via Lambda
+const RIOT_API_URL = 'https://drkwtz22yumgqdhn2u5xa2knie0vijnw.lambda-url.us-east-1.on.aws/'; // Lambda Function URL
+
+document.addEventListener('DOMContentLoaded', function() {
+  const lookupBtn = document.getElementById('lookup-btn');
+  const summonerNameInput = document.getElementById('summoner-name');
+  const regionSelect = document.getElementById('region');
+
+  lookupBtn.addEventListener('click', async function() {
+    const summonerName = summonerNameInput.value.trim();
+    const region = regionSelect.value;
+    const resultsDiv = document.getElementById('summoner-results');
+
+    if (!summonerName) { showMessage('Please enter a Riot ID', 'error'); return; }
+    if (!summonerName.includes('#')) { showMessage('Please use Riot ID format: GameName#TAG', 'error'); return; }
+
+    // loading state
+    lookupBtn.textContent = 'Looking up...';
+    lookupBtn.disabled = true;
+    document.getElementById('lookup-message').style.display = 'none';
+    resultsDiv.style.display = 'none';
+
+    try {
+      const response = await fetch(RIOT_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ summonerName, region })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        try {
+          await renderResultsSimple(data);
+          showMessage('Summoner found!', 'success');
+        } catch (e) {
+          console.error('[RR] renderResultsSimple failed:', e);
+          showMessage('Render failed — see console for details', 'error');
+        }
+        resultsDiv.style.display = 'block';
+      } else {
+        showMessage(data.error || 'Failed to fetch summoner data', 'error');
+      }
+    } catch (err) {
+      console.error('Lookup error:', err);
+      showMessage('Network or server error. See console for details.', 'error');
+    } finally {
+      lookupBtn.textContent = 'Look Up Summoner';
+      lookupBtn.disabled = false;
     }
-</script>
-<script>
-/* ========= DDragon champion map + images (cached) ========= */
-(function(){
-  const DAY = 24*60*60*1000;
-  const FALLBACK_VER = "14.19.1"; // safe hard fallback for images
-
-  // Expose a single global you can await anywhere
-  window.CHAMP = {
-    version: null,
-    byId: {},       // e.g. {103:"Ahri"}
-    slugById: {},   // e.g. {103:"Ahri"}  // used for image filenames
-    ready: null     // Promise that resolves when map is loaded
-  };
-
-  function setCache(k,v,ttl){ sessionStorage.setItem(k, JSON.stringify({v, t:Date.now(), ttl: ttl||DAY*7})); }
-  function getCache(k){
-    try{ const o = JSON.parse(sessionStorage.getItem(k)); if(!o) return null;
-         if(Date.now() - o.t > (o.ttl||DAY*7)) return null; return o.v; }catch(_){ return null; }
-  }
-
- async function getLatestVersion(){
-    const cached = getCache('dd_version'); if (cached) return cached;
-    try{
-      const r = await fetch("https://ddragon.leagueoflegends.com/api/versions.json",{cache:"no-store"});
-      const arr = await r.json();
-      const latest = Array.isArray(arr)&&arr.length ? arr[0] : FALLBACK_VER;
-      setCache('dd_version', latest, DAY);
-      return latest;
-    }catch(_){
-      return FALLBACK_VER; // 👈 ensures images always have a concrete version
-    }
-  }
-
-  async function getChampionMap(version){
-    const key = `dd_champmap_${version}`;
-    const cached = getCache(key); if (cached) return cached;
-    const r = await fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`,{cache:"no-store"});
-    const data = await r.json();
-    const byId={}, slugById={};
-    for(const obj of Object.values(data.data)){
-      const id = parseInt(obj.key,10);
-      byId[id] = obj.name;   // display name
-      slugById[id] = obj.id; // filename slug for images
-    }
-    const packed = {byId, slugById};
-    setCache(key, packed, DAY*7);
-    return packed;
-  }
-
-  window.CHAMP.ready = (async ()=>{
-    const ver = await getLatestVersion();
-    const {byId, slugById} = await getChampionMap(ver);
-    window.CHAMP.version = ver;
-    window.CHAMP.byId = byId;
-    window.CHAMP.slugById = slugById;
-  })();
-})();
-</script>
-<script>
-async function renderResults(data){
-  // Wait for champion map to be ready
-  if (window.CHAMP?.ready) { await window.CHAMP.ready; }
-
-  // Summoner card 
-  const card = document.querySelector('.summoner-card');
-  if (card && data?.summoner){
-    card.innerHTML = `
-      <h5>${data.summoner.name}</h5>
-      <p>Level ${data.summoner.level ?? '—'}</p>
-    `;
-  }
-
-  // Champions grid with image + text
-  const grid = document.querySelector('.champions-grid');
-  if (!grid) return;
-  grid.innerHTML = '';
-
-  const champs = data?.topChampions || [];
-  champs.forEach(c => {
-    const id   = Number(c.championId);
-    const name = window.CHAMP.byId[id] || `ID ${id}`;
-    const slug = window.CHAMP.slugById[id];
-    const ver  = window.CHAMP.version || "14.19.1";
-    const img  = slug ? `https://ddragon.leagueoflegends.com/cdn/${ver}/img/champion/${slug}.png` : '';
-
-    const el = document.createElement('div');
-    el.className = 'champion-card';
-    el.innerHTML = `
-      ${img ? `<img class="champ-icon" src="${img}" alt="${name}" width="64" height="64"
-                 loading="lazy" onerror="this.style.display='none'">` : ''}
-      <div class="champ-meta">
-        <p><strong>${name}</strong></p>
-        <p>Mastery Level: ${c.championLevel}</p>
-        <p>Mastery Points: ${(c.championPoints||0).toLocaleString()}</p>
-      </div>
-    `;
-    grid.appendChild(el);
   });
 
-  // optional: scroll results into view
-  document.querySelector('.summoner-results')?.scrollIntoView({behavior:'smooth', block:'start'});
+  // Enter key support
+  summonerNameInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') lookupBtn.click();
+  });
+});
+
+function showMessage(text, type) {
+  const messageDiv = document.getElementById('lookup-message');
+  messageDiv.textContent = text;
+  messageDiv.className = `lookup-message ${type}`;
+  messageDiv.style.display = 'block';
+  setTimeout(() => { messageDiv.style.display = 'none'; }, 10000);
 }
 </script>
 
-<script>
-{
-  const grid = document.querySelector('.champions-grid');
-  const card = document.querySelector('.summoner-card');
-  if (!grid) return;
+</script>
 
-  // Summoner card (keeps your current structure)
-  if (card && data?.summoner){
-    card.innerHTML = `
-      <h5>${data.summoner.name}</h5>
-      <p>Level ${data.summoner.level ?? '—'}</p>
-    `;
+<script>
+async function renderResultsSimple(payload){
+  console.log("[RR] renderResultsSimple() called with payload:", payload);
+
+  const wrap    = document.getElementById('summoner-results');
+  const info    = document.getElementById('summoner-info');
+  const mastery = document.getElementById('champion-mastery');
+
+  // Hard guard: if any container missing, print a visible message so you can see it on-page.
+  if (!wrap || !info || !mastery){
+    console.error("[RR] Missing container(s). wrap:", !!wrap, "info:", !!info, "mastery:", !!mastery);
+    const target = document.querySelector('#summoner-results') || document.body;
+    target.innerHTML = `
+      <div style="padding:12px;border:1px solid #6b1e2a;background:#2b1318;color:#ffb3b3;border-radius:8px;margin-top:12px">
+        <strong>Renderer error:</strong> Missing one or more containers
+        (#summoner-results, #summoner-info, #champion-mastery).
+      </div>`;
+    return;
   }
 
-  // Champions
-  grid.innerHTML = '';
-  const champs = data?.topChampions || [];
-  champs.forEach(c => {
-    const name = (window.CHAMP.byId && window.CHAMP.byId[c.championId]) || `ID ${c.championId}`;
-    const slug = (window.CHAMP.slugById && window.CHAMP.slugById[c.championId]) || null;
-    const ver  = window.CHAMP.version || 'latest';
-    const img  = slug ? `https://ddragon.leagueoflegends.com/cdn/${ver}/img/champion/${slug}.png` : '';
+  // Always show the section
+  wrap.style.display = 'block';
 
-    const div = document.createElement('div');
-    div.className = 'champion-card';
-    div.innerHTML = `
-      ${img ? `<img class="champ-icon" src="${img}" alt="${name}" width="64" height="64" loading="lazy">` : ''}
-      <p><strong>${name}</strong></p>
-      <p>Level ${c.championLevel}</p>
-      <p>${(c.championPoints || 0).toLocaleString()} pts</p>
-    `;
-    grid.appendChild(div);
-  });
+  // ---- Summoner card ----
+  const s = (payload && payload.summoner) || {};
+  info.innerHTML = `
+    <div class="summoner-card">
+      <h5>${escapeHtml(s.name || 'Unknown Summoner')}</h5>
+      <p>Level: ${s.level ?? s.summonerLevel ?? '—'}</p>
+      ${s.puuid ? `<p class="mono">PUUID: ${escapeHtml(s.puuid)}</p>` : ''}
+    </div>
+  `;
+
+  const champs = Array.isArray(payload?.topChampions) ? payload.topChampions : [];
+  if (!champs.length){
+    console.warn("[RR] No topChampions found in payload.");
+    mastery.innerHTML = `
+      <div class="subtle" style="padding:8px 0">No champion mastery data returned.</div>
+      <details style="margin-top:8px"><summary>Debug: show raw payload</summary>
+        <pre style="white-space:pre-wrap">${escapeHtml(JSON.stringify(payload, null, 2))}</pre>
+      </details>`;
+    return;
+  }
+
+  // ---- DDragon: version + champ map ----
+  let version = 'latest';
+  try {
+    const vers = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(r=>r.json());
+    version = Array.isArray(vers) && vers.length ? vers[0] : '14.19.1';
+  } catch(e) {
+    console.warn("[RR] Failed to get versions.json, falling back:", e);
+    version = '14.19.1';
+  }
+
+  let mapByKey = {};
+  try {
+    const data = await fetch(`https://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/champion.json`).then(r=>r.json());
+    for (const id in data.data){
+      const c = data.data[id];
+      mapByKey[String(c.key)] = { slug: c.id, name: c.name };
+    }
+  } catch(e) {
+    console.warn("[RR] Failed to load champion.json; will show numeric IDs:", e);
+  }
+
+  const cards = champs.map(c=>{
+    const meta = mapByKey[String(c.championId)];
+    const name = meta?.name ?? `ID ${c.championId}`;
+    const slug = meta?.slug;
+    const img  = slug ? `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${slug}.png` : '';
+    const lvl  = c.championLevel ?? '—';
+    const pts  = (c.championPoints ?? 0).toLocaleString();
+
+    return `
+      <div class="champion-card">
+        ${img ? `<img class="champ-icon" src="${img}" alt="${escapeHtml(name)}" width="64" height="64" loading="lazy">` : ''}
+        <div>
+          <div><strong>${escapeHtml(name)}</strong></div>
+          <div class="subtle">Level ${lvl} • ${pts} pts</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  mastery.innerHTML = `
+    <h5>Top Champions</h5>
+    <div class="champions-grid">${cards}</div>
+    <details style="margin-top:8px"><summary>Debug: show raw payload</summary>
+      <pre style="white-space:pre-wrap">${escapeHtml(JSON.stringify(payload, null, 2))}</pre>
+    </details>
+  `;
+}
+
+function escapeHtml(s){
+  return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 </script>
+
 <script>
 // Smooth scroll for all same-page links
 document.querySelectorAll('a[href^="#"]').forEach(a => {

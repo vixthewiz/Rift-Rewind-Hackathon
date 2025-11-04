@@ -238,7 +238,7 @@ async function renderResults(data){
   // Wait for champion map to be ready
   if (window.CHAMP?.ready) { await window.CHAMP.ready; }
 
-  // Summoner card (keep your existing structure)
+  // Summoner card 
   const card = document.querySelector('.summoner-card');
   if (card && data?.summoner){
     card.innerHTML = `

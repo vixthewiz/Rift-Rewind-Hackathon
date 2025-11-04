@@ -139,7 +139,8 @@
                 const data = await response.json();
                 
                 if (response.ok) {
-                    displaySummonerData(data);
+                    await renderResults(data);
+                    document.getElementById('summoner-results').style.display = 'block';
                     showMessage('Summoner found!', 'success');
                 } else {
                     showMessage(data.error || 'Failed to fetch summoner data', 'error');
@@ -162,43 +163,7 @@
         });
     });
     
-    function displaySummonerData(data) {
-        const resultsDiv = document.getElementById('summoner-results');
-        const summonerInfo = document.getElementById('summoner-info');
-        const championMastery = document.getElementById('champion-mastery');
-        
-        // Display summoner info
-        summonerInfo.innerHTML = `
-            <div class="summoner-card">
-                <h5>${data.summoner.name}</h5>
-                <p>Level: ${data.summoner.level}</p>
-            </div>
-        `;
-        
-        // Display top champions
-        if (data.topChampions && data.topChampions.length > 0) {
-            const championsHtml = data.topChampions.map(champ => `
-                <div class="champion-card">
-                    <p><strong>Champion ID:</strong> ${champ.championId}</p>
-                    <p><strong>Mastery Level:</strong> ${champ.championLevel}</p>
-                    <p><strong>Mastery Points:</strong> ${champ.championPoints.toLocaleString()}</p>
-                </div>
-            `).join('');
-            
-            championMastery.innerHTML = `
-                <h5>Top Champions</h5>
-                <div class="champions-grid">
-                    ${championsHtml}
-                </div>
-            `;
-        } else {
-            championMastery.innerHTML = '<p>No champion mastery data found.</p>';
-        }
-        
-        resultsDiv.style.display = 'block';
-    }
-    
-    function showMessage(text, type) {
+       function showMessage(text, type) {
         const messageDiv = document.getElementById('lookup-message');
         messageDiv.textContent = text;
         messageDiv.className = `lookup-message ${type}`;
@@ -315,10 +280,7 @@ async function renderResults(data){
 </script>
 
 <script>
-async function renderResults(data){
-  // Ensure champion map is loaded
-  if (window.CHAMP?.ready) { await window.CHAMP.ready; }
-
+{
   const grid = document.querySelector('.champions-grid');
   const card = document.querySelector('.summoner-card');
   if (!grid) return;

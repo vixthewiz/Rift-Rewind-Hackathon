@@ -9,101 +9,99 @@
 </head>
 <body>
     <main>
-        <section class="hero">
-            <img src="profile.png" alt="Your Name" class="profile-photo">
-            <h1>VixTheWiz</h1>
-            <p class="tagline">Cloud Builder & AWS Enthusiast</p>
-            
-            <a href="https://builder.aws.com/community/@vixthewiz" target="_blank" class="aws-link">AWS Builder Center Profile</a>
-            <p class="scroll-link">
-                <a href="#league-lookup">Try my League Data Lookup ↓</a>
-            </p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="profile.png" alt="Your Name" class="profile-photo">
+    <h1>VixTheWiz</h1>
+    <p class="tagline">Cloud Builder & AWS Enthusiast</p>
+    <p class="scroll-link">
+      <a href="#league-lookup">Try my League Data Lookup ↓</a>
+    </p>
 
-            <!-- Player Insights -->
-            <div class="insights-actions" style="margin-top:16px; display:flex; gap:12px;">
-              <button type="button" id="insights-btn" class="lookup-submit-btn">
-                Analyze Player (Insights)
-              </button>
-              <span id="insights-message" class="lookup-message" style="display:none;"></span>
-            </div>
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="league">League Lookup</button>
+      <button class="tab-btn" data-tab="aws">AWS Builder Profile</button>
+      <button class="tab-btn" data-tab="project">My Current Project</button>
+      <button class="tab-btn" data-tab="fun">Fun Facts About Me</button>
+    </div>
 
-            <div id="player-insights" class="summoner-results" style="display:none; margin-top:16px;">
-              <h4>Player Insights</h4>
-              <div id="insights-summary"></div>
-              <div id="insights-topchamps" style="margin-top:12px;"></div>
-              <div id="insights-tips" style="margin-top:12px;"></div>
-            </div>
+    <!-- Tab Content Area -->
+    <div class="tab-content">
+      <!-- League Lookup Tab -->
+      <div id="tab-league" class="tab-panel active">
+        <h3>League Data Lookup</h3>
+        <p>Enter a Riot ID to see their level, top champions, and insights.</p>
 
-        </section>
-
-        <section class="fun-facts">
-            <h3>Fun Facts About Me</h3>
-            <div class="facts-grid">
-                <div class="fact-card">
-                    <h4>🚀 Challenge In Progress</h4>
-                    <p>Currently working on <a href="https://builder.aws.com/content/32Z4SrTB8V1g0mMUGmyMUWXVgsu/rift-rewind-hackathon-on-aws-builder-center" target="_blank">AWS Builder Challenge: Rift Rewind Hackaton</a></p>
-                </div>
-                <div class="fact-card">
-                    <h4>🎯 Learning Goal</h4>
-                    <p>Building my skills one AWS service at a time - Amazon Bedrock, SageMaker, Strands Agents</p>
-                </div>
-                <div class="fact-card">
-                    <h4>💡 Fun Project</h4>
-                    <p>This website is hosted on AWS through Amplify with CloudFront for global delivery!</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="aws-journey">
-            <h3>My current project</h3>
-            <p>I'm currently working on the "Rift Rewind Hackathon on AWS Builder Center" challenge. This site is part of my challenge progress!</p>
-            <a href="https://builder.aws.com/content/32Z4SrTB8V1g0mMUGmyMUWXVgsu/rift-rewind-hackathon-on-aws-builder-center" target="_blank" class="cta-button">View Challenge Details</a>
-        </section>
-
-        <!-- LEAGUE DATA LOOKUP SECTION -->
-        <section id="league-lookup" class="league-lookup">
-            <h3>League Data Lookup</h3>
-            <p>Enter a Riot ID to see their level and top champions!</p>
-    
-        <!-- Lookup message container for success/error messages -->
         <div id="lookup-message" class="lookup-message" style="display: none;"></div>
-    
+
         <div class="lookup-form-container">
-        <!-- Riot ID lookup form -->
-        <div class="form-group">
+          <div class="form-group">
             <label for="summoner-name">Riot ID</label>
-            <input type="text" id="summoner-name" name="summoner-name" placeholder="GameName#TAG (e.g., Hide on bush#KR1)" required>
-            <small style="color: #687078; display: block; margin-top: 4px;">Format: GameName#TAG</small>
-        </div>
-        <div class="form-group">
+            <input type="text" id="summoner-name" name="summoner-name" placeholder="GameName#TAG" required>
+            <small style="color: #687078;">Format: GameName#TAG</small>
+          </div>
+
+          <div class="form-group">
             <label for="region">Region</label>
             <select id="region" name="region">
-                <option value="na1">North America</option>
-                <option value="euw1">Europe West</option>
-                <option value="eun1">Europe Nordic & East</option>
-                <option value="kr">Korea</option>
-                <option value="br1">Brazil</option>
-                <option value="la1">Latin America North</option>
-                <option value="la2">Latin America South</option>
-                <option value="oc1">Oceania</option>
-                <option value="tr1">Turkey</option>
-                <option value="ru">Russia</option>
-                <option value="jp1">Japan</option>
+              <option value="na1">NA</option>
+              <option value="euw1" selected>EUW</option>
+              <option value="eun1">EUNE</option>
+              <option value="kr">Korea</option>
             </select>
-        </div>
-        <!-- Lookup submit button -->
-        <button type="button" id="lookup-btn" class="lookup-submit-btn">Look Up Summoner</button>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" id="lookup-btn" class="lookup-submit-btn">Look Up Summoner</button>
+            <button type="button" id="insights-btn" class="lookup-submit-btn secondary">Analyze Player</button>
+          </div>
         </div>
 
-    <!-- Results display area -->
-    <div id="summoner-results" class="summoner-results" style="display: none;">
-        <h4>Summoner Info</h4>
-        <div id="summoner-info"></div>
-        <div id="champion-mastery"></div>
+        <div id="summoner-results" class="summoner-results" style="display: none;">
+          <h4>Summoner Info</h4>
+          <div id="summoner-info"></div>
+          <div id="champion-mastery"></div>
+          <div id="player-insights" class="summoner-results" style="display:none;">
+            <h4>Player Insights</h4>
+            <div id="insights-summary"></div>
+            <div id="insights-topchamps"></div>
+            <div id="insights-tips"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AWS Builder Tab -->
+      <div id="tab-aws" class="tab-panel">
+        <h3>My AWS Builder Profile</h3>
+        <p>Check out my progress and community posts on AWS Builder Center.</p>
+        <a href="https://builder.aws.com/community/@vixthewiz" target="_blank" class="cta-button">
+          Visit my AWS Profile
+        </a>
+      </div>
+
+      <!-- Current Project Tab -->
+      <div id="tab-project" class="tab-panel">
+        <h3>My Current Project</h3>
+        <p>I'm working on the <strong>Rift Rewind Hackathon</strong> – a League of Legends data experience powered by AWS!</p>
+        <a href="https://builder.aws.com/content/32Z4SrTB8V1g0mMUGmyMUWXVgsu/rift-rewind-hackathon-on-aws-builder-center" target="_blank" class="cta-button">
+          View Project Details
+        </a>
+      </div>
+
+      <!-- Fun Facts Tab -->
+      <div id="tab-fun" class="tab-panel">
+        <h3>Fun Facts About Me</h3>
+        <ul class="fun-list">
+          <li>🚀 AWS enthusiast & cloud builder.</li>
+          <li>💡 Enjoys blending beauty, design & tech innovation.</li>
+          <li>🎯 Always learning something new every day!</li>
+        </ul>
+      </div>
     </div>
-</section>
-<!-- END LEAGUE DATA LOOKUP SECTION -->
-    </main>
+  </section>
+</main>
+
 
     <footer>
         <p>&copy; 2025 Victoria @VixTheWiz. Built with ❤️ on AWS</p>
@@ -387,6 +385,23 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 </script>
+
+<script>
+// Simple Tab Toggle Logic
+document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.tab-panel');
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      tabs.forEach(b => b.classList.toggle('active', b === btn));
+      panels.forEach(p => p.classList.toggle('active', p.id === `tab-${target}`));
+    });
+  });
+});
+</script>
+
 
 </body>
 </html>

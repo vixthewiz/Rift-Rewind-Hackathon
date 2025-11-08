@@ -18,6 +18,22 @@
             <p class="scroll-link">
                 <a href="#league-lookup">Try my League Data Lookup ↓</a>
             </p>
+
+            <!-- Player Insights -->
+            <div class="insights-actions" style="margin-top:16px; display:flex; gap:12px;">
+              <button type="button" id="insights-btn" class="lookup-submit-btn">
+                Analyze Player (Insights)
+              </button>
+              <span id="insights-message" class="lookup-message" style="display:none;"></span>
+            </div>
+
+            <div id="player-insights" class="summoner-results" style="display:none; margin-top:16px;">
+              <h4>Player Insights</h4>
+              <div id="insights-summary"></div>
+              <div id="insights-topchamps" style="margin-top:12px;"></div>
+              <div id="insights-tips" style="margin-top:12px;"></div>
+            </div>
+
         </section>
 
         <section class="fun-facts">
@@ -169,7 +185,7 @@ async function renderResultsSimple(payload){
   const info    = document.getElementById('summoner-info');
   const mastery = document.getElementById('champion-mastery');
 
-  // Hard guard: if any container missing, print a visible message so you can see it on-page.
+  // Hard guard: if any container is missing, print a visible message to see it on-page.
   if (!wrap || !info || !mastery){
     console.error("[RR] Missing container(s). wrap:", !!wrap, "info:", !!info, "mastery:", !!mastery);
     const target = document.querySelector('#summoner-results') || document.body;
@@ -249,6 +265,114 @@ function escapeHtml(s){
   return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 </script>
+
+<script>
+const INSIGHTS_URL = 'https://sh6nun3cs6vhhqmhjzloq6hz6y0jailk.lambda-url.us-east-1.on.aws/'; // Insights Lambda Function URL
+
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('insights-btn');
+  const msg = document.getElementById('insights-message');
+
+  btn.addEventListener('click', async function() {
+    const riotId = document.getElementById('summoner-name').value.trim();
+    const region = document.getElementById('region').value;
+
+    if (!riotId || !riotId.includes('#')) {
+      showInsightsMsg('Please enter Riot ID as GameName#TAG', 'error');
+      return;
+    }
+
+    btn.disabled = true;
+    const original = btn.textContent;
+    btn.textContent = 'Analyzing…';
+    showInsightsMsg('', null, true);
+    document.getElementById('player-insights').style.display = 'none';
+
+    try {
+      const res = await fetch(INSIGHTS_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ riotId, region, force: false })
+      });
+
+      const payload = await res.json();
+      if (!res.ok) {
+        showInsightsMsg(payload.error || 'Analysis failed.', 'error');
+        return;
+      }
+      renderInsights(payload);
+      document.getElementById('player-insights').style.display = 'block';
+      showInsightsMsg('Insights ready!', 'success');
+    } catch (e) {
+      console.error('[Insights] error', e);
+      showInsightsMsg('Network or server error.', 'error');
+    } finally {
+      btn.textContent = original;
+      btn.disabled = false;
+    }
+  });
+
+  function showInsightsMsg(text, type, hide=false){
+    msg.textContent = text || '';
+    msg.className = 'lookup-message' + (type ? (' ' + type) : '');
+    msg.style.display = hide ? 'none' : 'inline-block';
+  }
+});
+
+function renderInsights(data){
+  const s = data.summary || {};
+  const sumEl = document.getElementById('insights-summary');
+  const champsEl = document.getElementById('insights-topchamps');
+  const tipsEl = document.getElementById('insights-tips');
+
+  // Summary
+  sumEl.innerHTML = `
+    <div class="summoner-card">
+      <p><strong>Region:</strong> ${escapeHtml(data.region || '—')}</p>
+      <p><strong>Games:</strong> ${s.games ?? 0} • <strong>Wins:</strong> ${s.wins ?? 0}
+         • <strong>Win Rate:</strong> ${((s.winRate ?? 0)*100).toFixed(1)}%</p>
+      <p><strong>Main Roles:</strong> ${fmtCounts(s.roleMix)}</p>
+      <p><strong>Queues:</strong> ${fmtCounts(s.queueMix)}</p>
+    </div>
+  `;
+
+  // Top champs
+  const rows = Array.isArray(s.topChamps) ? s.topChamps : [];
+  if (rows.length) {
+    const html = rows.map(r => `
+      <div class="champion-card">
+        <div>
+          <div><strong>${escapeHtml(r.champion)}</strong></div>
+          <div class="subtle">
+            ${r.games} games • WR ${(r.winRate*100).toFixed(1)}% • avgKDA ${r.avgKDA.toFixed(2)}
+          </div>
+        </div>
+      </div>
+    `).join('');
+    champsEl.innerHTML = `<h5>Top Champions</h5><div class="champions-grid">${html}</div>`;
+  } else {
+    champsEl.innerHTML = `<div class="subtle">No champion stats found.</div>`;
+  }
+
+  // Tips
+  const tips = Array.isArray(data.tips) ? data.tips : [];
+  tipsEl.innerHTML = tips.length
+    ? `<h5>Coaching Tips</h5><ul>${tips.map(t=>`<li>${escapeHtml(t)}</li>`).join('')}</ul>`
+    : `<div class="subtle">No tips available.</div>`;
+}
+
+function fmtCounts(obj){
+  if (!obj) return '—';
+  const entries = Object.entries(obj);
+  if (!entries.length) return '—';
+  return entries.map(([k,v]) => `${escapeHtml(k)}: ${v}`).join(', ');
+}
+
+function escapeHtml(s){
+  return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+</script>
+
 
 <script>
 // Smooth scroll for all same-page links

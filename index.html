@@ -55,6 +55,7 @@
           <div class="form-actions">
             <button type="button" id="lookup-btn" class="lookup-submit-btn">Look Up Summoner</button>
             <button type="button" id="insights-btn" class="lookup-submit-btn secondary">Analyze Player</button>
+            <span id="insights-message" class="lookup-message" style="display:none;"></span>
           </div>
         </div>
 
@@ -335,11 +336,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     });
 
-  function showInsightsMsg(text, type, hide=false){
-    msg.textContent = text || '';
-    msg.className = 'lookup-message' + (type ? (' ' + type) : '');
-    msg.style.display = hide ? 'none' : 'inline-block';
+  // --- Safe version of showInsightsMsg that ensures element exists ---
+function ensureInsightsMsgEl() {
+  let el = document.getElementById('insights-message');
+  if (!el) {
+    el = document.createElement('span');
+    el.id = 'insights-message';
+    el.className = 'lookup-message';
+    el.style.display = 'none';
+    // place right after Analyze Player button
+    const btn = document.getElementById('insights-btn');
+    if (btn && btn.parentElement) {
+      btn.parentElement.appendChild(el);
+    } else {
+      document.body.appendChild(el);
+    }
   }
+  return el;
+}
+
+function showInsightsMsg(text, type, hide=false){
+  const msg = ensureInsightsMsgEl();
+  msg.textContent = text || '';
+  msg.className = 'lookup-message' + (type ? (' ' + type) : '');
+  msg.style.display = hide ? 'none' : 'inline-block';
+}
+
 });
 
 function renderInsights(data){

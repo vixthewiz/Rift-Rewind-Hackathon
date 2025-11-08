@@ -609,3 +609,44 @@ footer a{ color: var(--grad-start); }
 }
 .tab-btn:hover { background: rgba(255,255,255,0.2); }
 .tab-btn.active { background: #7b5cff; color: #fff; }
+
+/* --- Form layout improvements --- */
+.lookup-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 420px;
+  text-align: left;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #fff;
+}
+
+.form-group small {
+  color: #a0a0a0;
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+.form-group input::placeholder { color: #888; }

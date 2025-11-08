@@ -163,6 +163,17 @@ main{ max-width: 1200px; margin: 0 auto; padding: 48px 20px; position: relative;
   background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
   -webkit-background-clip: text; background-clip: text; color: transparent;
   text-shadow: 0 0 24px rgba(215,169,235,.24);
+
+  .hero {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
 }
 
 .tagline{

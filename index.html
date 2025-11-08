@@ -402,6 +402,29 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<script>
+// Smooth scroll + auto-activate League tab
+document.addEventListener('DOMContentLoaded', () => {
+  const scrollLink = document.querySelector('.scroll-link a[href="#league-lookup"]');
+  if (!scrollLink) return;
+
+  scrollLink.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    // Activate the League tab if not active
+    const leagueBtn = document.querySelector('.tab-btn[data-tab="league"]');
+    const leaguePanel = document.getElementById('tab-league');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    leagueBtn.classList.add('active');
+    leaguePanel.classList.add('active');
+
+    // Smooth scroll to League section
+    leaguePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+
 
 </body>
 </html>

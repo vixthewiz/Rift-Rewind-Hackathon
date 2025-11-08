@@ -792,7 +792,7 @@ footer a{ color: var(--grad-start); }
 #summoner-results h4 {
   font-size: 1.1rem;
   letter-spacing: 0.5px;
-  text-transform: uppercase;
+  text-transform: none !important;
   color: #ddd;
   margin-bottom: 10px;
 }
@@ -884,4 +884,31 @@ footer a{ color: var(--grad-start); }
 }
 .summoner-card.active-glow {
   animation: glowPulse 2.5s ease-in-out 2;
+}
+
+/* --- Analyze Player button states --- */
+
+/* default inactive look */
+#insights-btn {
+  background: #444;
+  color: #bbb;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+}
+
+/* active + glowing orange when summoner found */
+#insights-btn.active {
+  background: #ff7b00;
+  color: #fff;
+  cursor: pointer;
+  box-shadow:
+    0 0 8px rgba(255, 140, 0, 0.6),
+    0 0 16px rgba(255, 120, 0, 0.4);
+}
+#insights-btn.active:hover {
+  box-shadow:
+    0 0 12px rgba(255, 160, 0, 0.7),
+    0 0 24px rgba(255, 120, 0, 0.5);
+  transform: translateY(-1px);
 }

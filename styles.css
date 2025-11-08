@@ -718,7 +718,7 @@ footer a{ color: var(--grad-start); }
 #summoner-results h4 {
   font-size: 1.1rem;
   letter-spacing: 0.5px;
-  text-transform: none;
+  text-transform: none !important;
   color: #ddd;
   margin-bottom: 10px;
 }

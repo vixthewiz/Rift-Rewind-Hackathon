@@ -207,6 +207,10 @@ async function renderResultsSimple(payload){
     </div>
   `;
 
+  // Apply soft glow animation once lookup succeeds
+  document.querySelector('.summoner-card')?.classList.add('active-glow');
+
+
   const champs = Array.isArray(payload?.topChampions) ? payload.topChampions : [];
   if (!champs.length){
     console.warn("[RR] No topChampions found in payload.");

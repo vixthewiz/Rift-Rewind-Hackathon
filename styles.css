@@ -650,3 +650,58 @@ footer a{ color: var(--grad-start); }
   color: #fff;
 }
 .form-group input::placeholder { color: #888; }
+
+/* --- Improved tab spacing & visual rhythm --- */
+
+/* Adds more breathing room below the tab bar */
+.tab-bar {
+  margin-bottom: 32px;
+}
+
+/* Give tab content balanced top/bottom padding */
+.tab-content {
+  margin-top: 36px;
+  padding: 20px 0 40px;
+}
+
+/* Extra air between tab title and following text */
+.tab-panel h3 {
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+}
+.tab-panel p {
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+/* Space between form groups and results */
+.lookup-form-container {
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+#summoner-results,
+#player-insights {
+  margin-top: 28px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Slight padding inside the champion cards grid */
+.champions-grid {
+  padding: 10px 0;
+  gap: 16px;
+}
+
+/* Adds visual spacing between different sections inside League tab */
+#summoner-results h4,
+#player-insights h4 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* Slightly more separation between the “hero” header and tab bar */
+.hero .tab-bar {
+  margin-top: 28px;
+  padding-top: 12px;
+}

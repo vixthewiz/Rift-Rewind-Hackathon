@@ -143,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
           await renderResultsSimple(data);
           showMessage('Summoner found!', 'success');
+          document.getElementById('insights-btn').classList.add('active'); // Enable insights/analyze button
         } catch (e) {
           console.error('[RR] renderResultsSimple failed:', e);
           showMessage('Render failed — see console for details', 'error');
@@ -150,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
         resultsDiv.style.display = 'block';
       } else {
         showMessage(data.error || 'Failed to fetch summoner data', 'error');
+        document.getElementById('insights-btn').classList.remove('active'); // Disable insights/analyze button
       }
     } catch (err) {
       console.error('Lookup error:', err);

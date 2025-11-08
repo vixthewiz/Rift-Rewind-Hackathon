@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const summonerNameInput = document.getElementById('summoner-name');
   const regionSelect = document.getElementById('region');
 
-  lookupBtn.addEventListener('click', async function() {
+  lookupBtn.addEventListener('click', async function() {              
     const summonerName = summonerNameInput.value.trim();
     const region = regionSelect.value;
     const resultsDiv = document.getElementById('summoner-results');
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const btn = document.getElementById('insights-btn');
   const msg = document.getElementById('insights-message');
 
-  btn.addEventListener('click', async function() {
+  btn.addEventListener('click', async function() {                      //Analyze Player (Insights) button
     const riotId = document.getElementById('summoner-name').value.trim();
     const region = document.getElementById('region').value;
 
@@ -293,28 +293,47 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('player-insights').style.display = 'none';
 
     try {
-      const res = await fetch(INSIGHTS_URL, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ riotId, region, force: false })
-      });
+    const res = await fetch(INSIGHTS_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ riotId, region, force: false })
+    });
 
-      const payload = await res.json();
-      if (!res.ok) {
-        showInsightsMsg(payload.error || 'Analysis failed.', 'error');
-        return;
-      }
+    const rawText = await res.text();
+    console.log('[Insights] HTTP', res.status, rawText);
+
+    let payload;
+    try { payload = rawText ? JSON.parse(rawText) : {}; } catch { payload = {}; }
+
+    // unwrap if Lambda returned {statusCode, body}
+    if (payload && typeof payload === 'object' && 'body' in payload) {
+      try { payload = JSON.parse(payload.body); } catch {}
+    }
+
+    if (!res.ok) {
+      const msg = (payload && payload.error) || `Analysis failed (HTTP ${res.status}).`;
+      showInsightsMsg(msg, 'error');
+      document.getElementById('insights-btn').classList.remove('active');
+      return;
+    }
+
+    if (!payload || !payload.summary) {
+      showInsightsMsg('No insights returned. Check Lambda logs.', 'error');
+      console.warn('[Insights] Unexpected payload:', payload);
+      return;
+    }
+
       renderInsights(payload);
       document.getElementById('player-insights').style.display = 'block';
       showInsightsMsg('Insights ready!', 'success');
+
     } catch (e) {
-      console.error('[Insights] error', e);
+      console.error('[Insights] network error', e);
       showInsightsMsg('Network or server error.', 'error');
-    } finally {
-      btn.textContent = original;
-      btn.disabled = false;
+      document.getElementById('insights-btn').classList.remove('active');
     }
-  });
+
+    });
 
   function showInsightsMsg(text, type, hide=false){
     msg.textContent = text || '';

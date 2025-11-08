@@ -705,3 +705,78 @@ footer a{ color: var(--grad-start); }
   margin-top: 28px;
   padding-top: 12px;
 }
+
+/* --- Summoner Results Cleanup --- */
+
+/* Make result cards more compact and aligned */
+#summoner-results {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#summoner-results h4 {
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #ddd;
+  margin-bottom: 10px;
+}
+
+/* Summoner name smaller + centered nicely */
+.summoner-card h5 {
+  font-size: 1.2rem;
+  margin: 6px 0 2px;
+  color: #b8a2ff;
+  font-weight: 600;
+}
+.summoner-card p {
+  margin: 0;
+  color: #cfcfcf;
+}
+
+/* Champion grid alignment fix */
+.champions-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 10px 0;
+}
+
+/* Individual champion card refinement */
+.champion-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 200px;
+  box-sizing: border-box;
+  transition: background 0.3s, transform 0.2s;
+}
+.champion-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Champion icon consistency */
+.champion-card img.champ-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* Champion text size tweaks */
+.champion-card strong {
+  display: block;
+  font-size: 0.95rem;
+  color: #fff;
+}
+.champion-card .subtle {
+  font-size: 0.85rem;
+  color: #ccc;
+}

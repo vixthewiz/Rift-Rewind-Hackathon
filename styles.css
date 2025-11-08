@@ -527,3 +527,85 @@ footer a{ color: var(--grad-start); }
   border-left: 2px solid #7b5cff;
 }
 
+/* 1) Make all primary buttons larger (tab buttons included) */
+.lookup-submit-btn,
+.tab-btn {
+  padding: 12px 18px;
+  font-size: 16px;
+  line-height: 1.1;
+  border-radius: 10px;
+  min-width: 190px;
+  font-weight: 600;
+}
+
+/* Secondary (grey) variant still a touch darker on hover */
+.lookup-submit-btn.secondary {
+  background: #444;
+}
+.lookup-submit-btn.secondary:hover {
+  background: #555;
+}
+
+/* 2) Center all tab-panel content (was left-aligned) */
+.tab-content { text-align: center; }
+.tab-panel { text-align: center; }
+
+/* 3) Put "Analyze Player" right next to "Look Up Summoner" */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* 4) Center the section headings for results */
+#summoner-results h4,
+#player-insights h4 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* 5) Fix champion cards layout and width so they don’t look cramped */
+.champions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.champion-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.champion-card img.champ-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* 6) Slightly larger tab bar buttons to match primary CTAs visually */
+.tab-bar { 
+  display: flex; 
+  justify-content: center; 
+  gap: 12px; 
+  margin-top: 20px; 
+  border-top: 1px solid rgba(255,255,255,0.15); 
+  padding-top: 12px; 
+  flex-wrap: wrap; 
+}
+.tab-btn {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: none;
+  transition: background 0.3s;
+}
+.tab-btn:hover { background: rgba(255,255,255,0.2); }
+.tab-btn.active { background: #7b5cff; color: #fff; }

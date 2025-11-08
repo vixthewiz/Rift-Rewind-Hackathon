@@ -854,3 +854,34 @@ footer a{ color: var(--grad-start); }
   font-size: 0.85rem;
   color: #ccc;
 }
+/* --- Summoner Card Glow Effect --- */
+.summoner-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(150, 130, 255, 0.25);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin: 10px auto 20px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow:
+    0 0 10px rgba(123, 92, 255, 0.3),
+    0 0 20px rgba(123, 92, 255, 0.15);
+  transition: all 0.35s ease;
+}
+
+.summoner-card:hover {
+  border-color: rgba(160, 140, 255, 0.6);
+  box-shadow:
+    0 0 14px rgba(150, 120, 255, 0.4),
+    0 0 28px rgba(123, 92, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Optional animated pulse when freshly loaded */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(123, 92, 255, 0.3), 0 0 20px rgba(123, 92, 255, 0.15); }
+  50% { box-shadow: 0 0 14px rgba(150, 120, 255, 0.5), 0 0 30px rgba(123, 92, 255, 0.3); }
+}
+.summoner-card.active-glow {
+  animation: glowPulse 2.5s ease-in-out 2;
+}

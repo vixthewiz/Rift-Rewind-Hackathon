@@ -61,22 +61,19 @@
 
         <div id="summoner-results" class="summoner-results" style="display:none;">
         <div id="summary-row" class="summary-row">
-          <!-- Left: Summoner Info -->
+          <!-- Left: Summoner Info + Top Champs -->
           <div class="summary-col">
             <h4>Summoner Info</h4>
             <div id="summoner-info"></div>
-          </div>
-          <!-- Right: Player insights (Top champs lives here) -->
-          <div id="player-insights" class="summary-col" style="display:none;">
-            <h4>Player Insights</h4>
-
-            <!-- summary (region, games, win rate, roles, queues) -->
-            <div id="insights-summary"></div>
-
-            <!-- top champions go here -->
             <h5 class="subtle" style="margin-top:16px;">Top Champions</h5>
             <div id="insights-topchamps"></div>
+          </div>
 
+          <!-- Right: Player insights -->
+          <div id="player-insights" class="summary-col" style="display:none;">
+            <h4>Player Insights</h4>
+            <!-- summary (region, games, win rate, roles, queues) -->
+            <div id="insights-summary"></div>
             <!-- coaching tips -->
             <div id="insights-tips"></div>
           </div>
@@ -199,9 +196,8 @@ async function renderResultsSimple(payload){
   const wrap    = document.getElementById('summoner-results');
   const info    = document.getElementById('summoner-info');
   // NEW — write Top Champions into the insights column
-  const mastery = document.getElementById('insights-topchamps')
-                 || document.getElementById('champion-mastery'); // fallback if it exists
-
+  const mastery = document.getElementById('champion-mastery');
+                 
  
   // Always show the section
   wrap.style.display = 'block';

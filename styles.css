@@ -1026,3 +1026,37 @@ footer a{ color: var(--grad-start); }
     max-width: 720px;
   }
 }
+.summary-row {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+  align-items: start;
+  justify-items: stretch;
+  max-width: 1100px;
+  margin: 20px auto 28px;
+}
+
+.summary-col {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Mobile stacking */
+@media (max-width: 900px) {
+  .summary-row {
+    grid-template-columns: 1fr !important;
+    max-width: 720px;
+  }
+}
+#champion-mastery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+#champion-mastery .champion-card {
+  flex: 1 1 100px;
+  max-width: 140px;
+}

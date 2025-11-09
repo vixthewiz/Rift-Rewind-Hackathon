@@ -119,12 +119,6 @@
 // League Data Lookup - Calls Riot API via Lambda
 const RIOT_API_URL = 'https://drkwtz22yumgqdhn2u5xa2knie0vijnw.lambda-url.us-east-1.on.aws/'; // Lambda Function URL
 
-<div class="button-group">
-  <button type="button" id="lookup-btn" class="lookup-submit-btn">Look Up Summoner</button>
-  <button type="button" id="analyze-btn" class="analyze-btn" disabled>Analyze Player</button>
-  <span id="insights-ready" class="insights-ready" style="display:none;">Insights ready!</span>
-</div>
-
 document.addEventListener('DOMContentLoaded', function() {
   const lookupBtn = document.getElementById('lookup-btn');
   const summonerNameInput = document.getElementById('summoner-name');

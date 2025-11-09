@@ -972,3 +972,39 @@ footer a{ color: var(--grad-start); }
 #player-insights .summoner-card {
   width: 100%;
 }
+/* --- FORCE two-column layout on desktop, equal widths --- */
+.summary-row{
+  display:grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap:24px !important;
+  align-items: stretch;           /* make both columns equal height if possible */
+  justify-items: stretch;
+  max-width: 1100px;              /* room for two cards on 1366px screens */
+  margin: 20px auto 28px;
+}
+
+/* each side should fill its grid cell */
+.summary-col{
+  width:100% !important;
+  max-width:none !important;
+}
+
+/* make sure the “card” inside each column expands */
+.summary-col .summoner-card,
+#summoner-info .summoner-card,
+#player-insights .summoner-card{
+  width:100% !important;
+  height:auto;
+  box-sizing:border-box;
+}
+
+/* the insights column should not be narrower */
+#player-insights{ width:100% !important; }
+
+/* below 900px, stack vertically (mobile/tablet) */
+@media (max-width: 900px){
+  .summary-row{
+    grid-template-columns: 1fr !important;
+    max-width: 720px;
+  }
+}

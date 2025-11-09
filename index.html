@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
           await renderResultsSimple(data);
           showMessage('Summoner found!', 'success');
           document.getElementById('insights-btn').classList.add('active'); // Enable insights/analyze button
+          document.getElementById('insights-btn').disabled = false;
         } catch (e) {
           console.error('[RR] renderResultsSimple failed:', e);
           showMessage('Render failed — see console for details', 'error');
@@ -271,6 +272,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const riotId = document.getElementById('summoner-name').value.trim();
     const region = document.getElementById('region').value;
 
+    const analyzeBtn = document.getElementById('insights-btn');
+    // reset analyze state for a new search
+    analyzeBtn.textContent = 'Analyze Player';
+    analyzeBtn.disabled = true;
+    analyzeBtn.classList.remove('active');
+    showInsightsMsg('', '', true); // hide chip
+    // optionally clear previous insights content
+    //document.getElementById('insights-summary').innerHTML = '';
+    //document.getElementById('insights-topchamps').innerHTML = '';
+    //document.getElementById('insights-tips').innerHTML = '';
+
     if (!riotId || !riotId.includes('#')) {
       showInsightsMsg('Please enter Riot ID as GameName#TAG', 'error');
       return;
@@ -321,8 +333,9 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('[Insights] network error', e);
       showInsightsMsg('Network or server error.', 'error');
       document.getElementById('insights-btn').classList.remove('active');
-    }
-
+    } finally {
+      btn.textContent = 'Analyze Player';    // <- always restore
+      }
     });
 
   // --- Safe version of showInsightsMsg that ensures element exists ----

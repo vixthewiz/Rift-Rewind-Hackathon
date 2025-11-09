@@ -1222,6 +1222,7 @@ footer a{ color: var(--grad-start); }
   display: grid;
   grid-template-columns: 1fr 1fr;  /* two equal columns, no wrapping */
   gap: 12px;
+  margin-bottom: 32px;              /* space for the badge */
   align-items: stretch;
   justify-items: stretch;
 }
@@ -1245,6 +1246,10 @@ footer a{ color: var(--grad-start); }
 /* Mobile: stack columns */
 @media (max-width: 900px){
   .league-layout{ grid-template-columns: 1fr; }
+  #insights-message{
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 /* --- Position "Insights ready!" directly under Analyze Player --- */
@@ -1255,9 +1260,9 @@ footer a{ color: var(--grad-start); }
 /* style for the green message */
 #insights-message {
   position: absolute;
-  bottom: -32px;        /* distance under the buttons */
-  left: 50%;
-  transform: translateX(50%);  /* <-- pushes it to align under right button */
+  top: calc(100% + 6px);            /* below the buttons */
+  left: 75%;                        /* center of the right-half (Analyze) */
+  transform: translateX(-50%);      /* true center under that button */
   display: inline-block;
   background: rgba(0, 255, 100, 0.12);
   border: 1px solid rgba(0, 255, 100, 0.3);
@@ -1266,6 +1271,8 @@ footer a{ color: var(--grad-start); }
   padding: 4px 10px;
   border-radius: 8px;
   white-space: nowrap;
+  pointer-events: none;             /* never block clicks even if close */
+  z-index: 0;
 }
 
 /* optional subtle animation when it appears */

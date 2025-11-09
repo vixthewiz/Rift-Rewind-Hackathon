@@ -197,9 +197,20 @@ async function renderResultsSimple(payload){
   const wrap    = document.getElementById('summoner-results');
   const info    = document.getElementById('summoner-info');
   // NEW — write Top Champions into the insights column
-  const mastery = document.getElementById('champion-mastery');
-                 
- 
+  // Find or create the mastery container in the left column
+  let mastery = document.getElementById('champion-mastery');
+  if (!mastery) {
+    const leftCol = document.querySelector('#summary-row .summary-col'); // first col
+    if (leftCol) {
+      mastery = document.createElement('div');
+      mastery.id = 'champion-mastery';
+      leftCol.appendChild(mastery);
+    } else {
+      console.error('[RR] Could not find left column to insert #champion-mastery');
+      return; // bail safely
+    }
+  }
+                  
   // Always show the section
   wrap.style.display = 'block';
 

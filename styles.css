@@ -1200,3 +1200,48 @@ footer a{ color: var(--grad-start); }
   opacity: 0.6;
   cursor: not-allowed;
 }
+/* 1) Give the left card more width; right side gets the rest */
+.league-layout{
+  display: grid;
+  /* Wider left: grows with viewport but never tiny */
+  grid-template-columns: clamp(360px, 32vw, 480px) minmax(0,1fr);
+  gap: 28px;       /* room so shadows/glows don't visually collide */
+  align-items: start;
+  width: 100%;
+}
+
+/* 2) Ensure inputs stretch to the card width */
+.league-left input,
+.league-left select{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 3) Buttons: keep aligned, and auto-wrap instead of overflowing */
+.form-actions{
+  display: grid;
+  /* Two equal columns when it fits; wraps to a new row if not */
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.lookup-submit-btn{
+  width: 100%;
+  min-width: 0;             /* prevents overflow */
+  height: 44px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 14px;
+  box-sizing: border-box;
+}
+
+/* Optional: tone down visual overlap from glows on hover */
+.lookup-submit-btn:hover{
+  filter: brightness(1.02);
+}
+
+/* Mobile: stack columns */
+@media (max-width: 900px){
+  .league-layout{ grid-template-columns: 1fr; }
+}

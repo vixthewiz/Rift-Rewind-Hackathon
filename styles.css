@@ -1246,3 +1246,34 @@ footer a{ color: var(--grad-start); }
 @media (max-width: 900px){
   .league-layout{ grid-template-columns: 1fr; }
 }
+
+/* --- Position "Insights ready!" directly under Analyze Player --- */
+.form-actions {
+  position: relative;   /* create positioning context */
+}
+
+/* style for the green message */
+#insights-message {
+  position: absolute;
+  bottom: -32px;        /* distance under the buttons */
+  left: 50%;
+  transform: translateX(50%);  /* <-- pushes it to align under right button */
+  display: inline-block;
+  background: rgba(0, 255, 100, 0.12);
+  border: 1px solid rgba(0, 255, 100, 0.3);
+  color: #7fffb7;
+  font-size: 0.85rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* optional subtle animation when it appears */
+#insights-message.show {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(50%) translateY(8px); }
+  to { opacity: 1; transform: translateX(50%) translateY(0); }
+}

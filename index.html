@@ -59,22 +59,30 @@
           </div>
         </div>
 
-        <div id="summoner-results" class="summoner-results" style="display: none;">
-          <div id="summary-row" class="summary-row"></div>
+        <div id="summoner-results" class="summoner-results" style="display:none;">
+        <div id="summary-row" class="summary-row">
           <!-- Left: Summoner Info -->
-           <div class="summary-col"></div>
-          <h4>Summoner Info</h4>
-          <div id="summoner-info"></div>
-          <div id="champion-mastery"></div>
+          <div class="summary-col">
+            <h4>Summoner Info</h4>
+            <div id="summoner-info"></div>
           </div>
-          <!-- Right: Player insights -->
+          <!-- Right: Player insights (Top champs lives here) -->
           <div id="player-insights" class="summary-col" style="display:none;">
             <h4>Player Insights</h4>
+
+            <!-- summary (region, games, win rate, roles, queues) -->
             <div id="insights-summary"></div>
+
+            <!-- top champions go here -->
+            <h5 class="subtle" style="margin-top:16px;">Top Champions</h5>
             <div id="insights-topchamps"></div>
+
+            <!-- coaching tips -->
             <div id="insights-tips"></div>
           </div>
         </div>
+        </div>
+
       </div>
 
       <!-- AWS Builder Tab -->
@@ -190,7 +198,9 @@ function showMessage(text, type) {
 async function renderResultsSimple(payload){
   const wrap    = document.getElementById('summoner-results');
   const info    = document.getElementById('summoner-info');
-  const mastery = document.getElementById('champion-mastery');
+  // NEW — write Top Champions into the insights column
+  const mastery = document.getElementById('insights-topchamps')
+                 || document.getElementById('champion-mastery'); // fallback if it exists
 
  
   // Always show the section

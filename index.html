@@ -33,6 +33,9 @@
         <h3>League Data Lookup</h3>
         <p>Enter a Riot ID to see their level, top champions, and insights.</p>
 
+        <div class="league-layout"><!-- NEW outer 2-col wrapper -->
+        <!-- Left: Lookup form block -->
+        <aside class="league-left">
         <div id="lookup-message" class="lookup-message" style="display: none;"></div>
 
         <div class="lookup-form-container">
@@ -58,7 +61,10 @@
             <span id="insights-message" class="lookup-message" style="display:none;"></span>
           </div>
         </div>
+        </aside>
 
+        <!-- Right: Results block (Summoner Info + Player Insights) -->
+        <section class="league-right">
         <div id="summoner-results" class="summoner-results" style="display:none;">
         <div id="summary-row" class="summary-row">
 
@@ -78,7 +84,7 @@
 
         </div>
         </div>
-
+        </section>
       </div>
 
       <!-- AWS Builder Tab -->

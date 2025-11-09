@@ -1103,3 +1103,33 @@ footer a{ color: var(--grad-start); }
     grid-template-columns: 1fr;
   }
 }
+/* Outer two-column layout for League panel */
+.league-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr; /* left lookup block, right results */
+  gap: 24px;
+  align-items: start;
+}
+
+/* Make the left block feel like a card and keep it visible while scrolling results */
+.league-left {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 16px;
+  position: sticky;
+  top: 16px; /* adjust if your header spacing differs */
+}
+
+/* Right column just inherits your existing card styles inside */
+.league-right { min-width: 0; }
+
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .league-layout {
+    grid-template-columns: 1fr;
+  }
+  .league-left {
+    position: static;
+  }
+}

@@ -1133,3 +1133,70 @@ footer a{ color: var(--grad-start); }
     position: static;
   }
 }
+/* --- League two-column layout tuning --- */
+.league-layout{
+  /* Left column smaller, right gets the rest */
+  display: grid;
+  grid-template-columns: clamp(260px, 20vw, 340px) minmax(0,1fr);
+  gap: 20px;                 /* a bit tighter gap so the right gains space */
+  align-items: start;
+  width: 100%;
+}
+
+/* Keep the left block “on the left” and compact */
+.league-left{
+  position: sticky;
+  top: 16px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* Right column: allow content to stretch fully */
+.league-right{ min-width: 0; }
+
+/* Inside the right column, keep Summoner Info + Player Insights side-by-side */
+#summary-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* both visible without lots of scrolling */
+  gap: 20px;
+}
+
+/* On wider screens give Insights a bit more room (helps long lines) */
+@media (min-width: 1200px){
+  #summary-row{ grid-template-columns: 1fr 1.2fr; }
+}
+
+/* Mobile: stack */
+@media (max-width: 900px){
+  .league-layout{ grid-template-columns: 1fr; }
+  .league-left{ position: static; }
+  #summary-row{ grid-template-columns: 1fr; }
+}
+
+/* --- Button alignment --- */
+/* Put both buttons in a 2-column grid and make them equal width */
+.form-actions{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+/* Ensure both buttons fill their grid cell identically */
+.lookup-submit-btn{
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 44px;         /* consistent height */
+  padding: 0 14px;      /* consistent horizontal padding */
+  box-sizing: border-box;
+}
+
+/* Optional: keep disabled button size identical */
+.lookup-submit-btn:disabled{
+  opacity: 0.6;
+  cursor: not-allowed;
+}

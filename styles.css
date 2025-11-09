@@ -1220,9 +1220,10 @@ footer a{ color: var(--grad-start); }
 /* 3) Buttons: keep aligned, and auto-wrap instead of overflowing */
 .form-actions{
   display: grid;
-  /* Two equal columns when it fits; wraps to a new row if not */
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: 1fr 1fr;  /* two equal columns, no wrapping */
   gap: 12px;
+  align-items: stretch;
+  justify-items: stretch;
 }
 
 .lookup-submit-btn{

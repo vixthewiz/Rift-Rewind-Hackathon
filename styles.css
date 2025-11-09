@@ -946,7 +946,7 @@ footer a{ color: var(--grad-start); }
 #insights-message{
   display:none;padding:6px 10px;font-size:13px;border-radius:999px;
   background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
-  color:#ddd;line-height:1;position:relative;top:2px; /* nudges it down to match buttons  */
+  color:#ddd;line-height:1;position:relative;top:4px; /* nudges it down to match buttons  */
 }
 #insights-message.success{color:#b5ffc3;border-color:rgba(0,255,120,.25)}
 #insights-message.error{color:#ffc1c1;border-color:rgba(255,80,80,.25)}

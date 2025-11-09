@@ -930,3 +930,15 @@ footer a{ color: var(--grad-start); }
 /* success/error colors */
 #insights-message.success { color: #b5ffc3; border-color: rgba(0,255,120,0.25); }
 #insights-message.error   { color: #ffc1c1; border-color: rgba(255,80,80,0.25); }
+
+/* Side-by-side row for Summoner + Insights (stacks on mobile) */
+.summary-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+  margin: 12px 0 20px;
+}
+@media (max-width: 900px) {
+  .summary-row { grid-template-columns: 1fr; }
+}

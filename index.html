@@ -210,6 +210,23 @@ async function renderResultsSimple(payload){
     </div>
   `;
 
+  // Place Summoner Info and Player Insights into a shared row
+  const insights = document.getElementById('player-insights');
+  let row = document.getElementById('summary-row');
+  if (!row) {
+    row = document.createElement('div');
+    row.id = 'summary-row';
+    row.className = 'summary-row';
+    wrap.prepend(row);
+  }
+  // ensure both cards are in the row in correct order
+  row.appendChild(info);
+  row.appendChild(insights);
+
+  // show insights container (empty at first)
+  insights.style.display = insights.innerHTML.trim() ? 'block' : 'block';
+
+
   // Apply soft glow animation once lookup succeeds
   document.querySelector('.summoner-card')?.classList.add('active-glow');
 

@@ -514,5 +514,79 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<script>
+(function(){
+  // Safe element getter
+  const $ = (id) => document.getElementById(id);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const lookupBtn  = $('lookup-btn');
+    const analyzeBtn = $('analyze-btn');
+
+    // Only add listeners if the nodes exist
+    if (lookupBtn)  lookupBtn.addEventListener('click', onLookupClick);
+    if (analyzeBtn) analyzeBtn.addEventListener('click', onAnalyzeClick);
+  });
+
+  // ---- UI state helpers (safe if elements are missing) ----
+  function setAnalyzeState(state){
+    const btn   = $('analyze-btn');
+    const badge = $('insights-ready');
+
+    if (btn){
+      if (state === 'working'){
+        btn.disabled = true;
+        btn.textContent = 'Analyzing...';
+        btn.classList.add('glow'); // optional style
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Analyze Player';
+        btn.classList.remove('glow');
+      }
+    }
+    if (badge){
+      if (state === 'ready'){
+        badge.style.display = 'inline-block';
+        // auto-hide after 15s
+        clearTimeout(badge._t);
+        badge._t = setTimeout(()=>{ badge.style.display='none'; }, 15000);
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+  }
+
+  // Example: call these in your existing flow at the right times:
+  // - after a successful summoner lookup:
+  //   $('analyze-btn')?.removeAttribute('disabled');
+  // - when starting insights:
+  //   setAnalyzeState('working');
+  // - when insights data is rendered:
+  //   setAnalyzeState('ready');
+  // - on failure:
+  //   setAnalyzeState('idle');
+
+  // ---- Hook up to your existing logic ----
+  async function onLookupClick(){
+    // your existing lookup code here (or call your existing function)
+    // make sure it doesn't assume nodes that might be missing
+  }
+
+  async function onAnalyzeClick(){
+    setAnalyzeState('working');
+    try {
+      // your existing analyze code here...
+      // on success:
+      setAnalyzeState('ready');
+      $('player-insights')?.style.setProperty('display','block');
+    } catch (e){
+      console.error('[Insights] error', e);
+      setAnalyzeState('idle');
+    }
+  }
+})();
+</script>
+
+
 </body>
 </html>

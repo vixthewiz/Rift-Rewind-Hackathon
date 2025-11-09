@@ -195,9 +195,20 @@ async function renderResultsSimple(payload){
   const wrap    = document.getElementById('summoner-results');
   const info    = document.getElementById('summoner-info');
   // NEW — write Top Champions into the insights column
-  const mastery = document.getElementById('champion-mastery');
-                 
- 
+  // Find or create the mastery container in the left column
+  let mastery = document.getElementById('champion-mastery');
+  if (!mastery) {
+    const leftCol = document.querySelector('#summary-row .summary-col'); // first col
+    if (leftCol) {
+      mastery = document.createElement('div');
+      mastery.id = 'champion-mastery';
+      leftCol.appendChild(mastery);
+    } else {
+      console.error('[RR] Could not find left column to insert #champion-mastery');
+      return; // bail safely
+    }
+  }
+                  
   // Always show the section
   wrap.style.display = 'block';
 
@@ -395,43 +406,42 @@ function showInsightsMsg(text, type, hide=false) {
 function renderInsights(data){
   const s = data.summary || {};
   const sumEl = document.getElementById('insights-summary');
-  const champsEl = document.getElementById('insights-topchamps');
+  //const champsEl = document.getElementById('insights-topchamps');
   const tipsEl = document.getElementById('insights-tips');
 
-  // Summary
-  sumEl.innerHTML = `
-    <div class="summoner-card">
-      <p><strong>Region:</strong> ${escapeHtml(data.region || '—')}</p>
-      <p><strong>Games:</strong> ${s.games ?? 0} • <strong>Wins:</strong> ${s.wins ?? 0}
-         • <strong>Win Rate:</strong> ${((s.winRate ?? 0)*100).toFixed(1)}%</p>
-      <p><strong>Main Roles:</strong> ${fmtCounts(s.roleMix)}</p>
-      <p><strong>Queues:</strong> ${fmtCounts(s.queueMix)}</p>
-    </div>
-  `;
-
-  // Top champs
-  const rows = Array.isArray(s.topChamps) ? s.topChamps : [];
-  if (rows.length) {
-    const html = rows.map(r => `
-      <div class="champion-card">
-        <div>
-          <div><strong>${escapeHtml(r.champion)}</strong></div>
-          <div class="subtle">
-            ${r.games} games • WR ${(r.winRate*100).toFixed(1)}% • avgKDA ${r.avgKDA.toFixed(2)}
-          </div>
-        </div>
+  if (sumEl) {
+    sumEl.innerHTML = `
+      <div class="summoner-card">
+        <p><strong>Region:</strong> ${escapeHtml(data.region || '—')}</p>
+        <p><strong>Games:</strong> ${s.games ?? 0}
+           • <strong>Wins:</strong> ${s.wins ?? 0}
+           • <strong>Win Rate:</strong> ${((s.winRate ?? 0) * 100).toFixed(1)}%</p>
+        <p><strong>Main Roles:</strong> ${fmtCounts(s.roleMix)}</p>
+        <p><strong>Queues:</strong> ${fmtCounts(s.queueMix)}</p>
       </div>
-    `).join('');
-    champsEl.innerHTML = `<h5>Top Champions</h5><div class="champions-grid">${html}</div>`;
-  } else {
-    champsEl.innerHTML = `<div class="subtle">No champion stats found.</div>`;
+    `;
   }
 
-  // Tips
-  const tips = Array.isArray(data.tips) ? data.tips : [];
-  tipsEl.innerHTML = tips.length
-    ? `<h5>Coaching Tips</h5><ul>${tips.map(t=>`<li>${escapeHtml(t)}</li>`).join('')}</ul>`
-    : `<div class="subtle">No tips available.</div>`;
+  if (tipsEl) {
+    const tips = Array.isArray(data.coachingTips) ? data.coachingTips : [];
+    tipsEl.innerHTML = tips.length
+      ? `
+        <h5 class="subtle">Coaching Tips</h5>
+        <ul class="tips-list">
+          ${tips.map(t => `<li>${escapeHtml(t)}</li>`).join('')}
+        </ul>`
+      : `<div class="subtle" style="padding:8px 0">No coaching tips yet.</div>`;
+  }
+}
+
+// helper used above
+function fmtCounts(obj){
+  if (!obj || typeof obj !== 'object') return '—';
+  const pairs = Object.entries(obj)
+    .sort((a,b) => b[1]-a[1])
+    .slice(0,3)
+    .map(([k,v]) => `${escapeHtml(k)}: ${v}`);
+  return pairs.length ? pairs.join(', ') : '—';
 }
 
 function fmtCounts(obj){

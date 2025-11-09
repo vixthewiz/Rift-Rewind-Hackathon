@@ -950,3 +950,25 @@ footer a{ color: var(--grad-start); }
 }
 #insights-message.success{color:#b5ffc3;border-color:rgba(0,255,120,.25)}
 #insights-message.error{color:#ffc1c1;border-color:rgba(255,80,80,.25)}
+
+/* --- Summoner Info + Player Insights side-by-side layout --- */
+.summary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  align-items: start;
+  justify-items: center;
+  margin: 20px auto 30px;
+  max-width: 900px;
+}
+
+.summary-col {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* make sure each column card takes full width within its grid cell */
+.summary-col .summoner-card,
+#player-insights .summoner-card {
+  width: 100%;
+}

@@ -60,16 +60,22 @@
         </div>
 
         <div id="summoner-results" class="summoner-results" style="display: none;">
+          <div id="summary-row" class="summary-row"></div>
+          <!-- Left: Summoner Info -->
+           <div class="summary-col"></div>
           <h4>Summoner Info</h4>
           <div id="summoner-info"></div>
-          <div id="champion-mastery"></div>
-          <div id="player-insights" class="summoner-results" style="display:none;">
+          </div>
+          <!-- Right: Player insights -->
+          <div id="player-insights" class="summary-col" style="display:none;">
             <h4>Player Insights</h4>
             <div id="insights-summary"></div>
             <div id="insights-topchamps"></div>
             <div id="insights-tips"></div>
           </div>
         </div>
+        <!-- Below both: Top champions -->
+        <div id="champion-mastery"></div>
       </div>
 
       <!-- AWS Builder Tab -->

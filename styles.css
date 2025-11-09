@@ -912,3 +912,21 @@ footer a{ color: var(--grad-start); }
     0 0 24px rgba(255, 120, 0, 0.5);
   transform: translateY(-1px);
 }
+/* Inline status chip next to buttons */
+.form-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+#insights-message {
+  display: none;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #ddd;
+  box-shadow: none;     /* don't look like a button */
+  line-height: 1;
+}
+
+/* success/error colors */
+#insights-message.success { color: #b5ffc3; border-color: rgba(0,255,120,0.25); }
+#insights-message.error   { color: #ffc1c1; border-color: rgba(255,80,80,0.25); }

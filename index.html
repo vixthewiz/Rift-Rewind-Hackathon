@@ -355,11 +355,27 @@ function ensureInsightsMsgEl() {
   return el;
 }
 
-function showInsightsMsg(text, type, hide=false){
+function ensureInsightsMsgEl() {
+  let el = document.getElementById('insights-message');
+  if (!el) {
+    el = document.createElement('span');
+    el.id = 'insights-message';
+    el.className = 'lookup-message';
+    el.style.display = 'none';
+    (document.getElementById('insights-btn')?.parentElement || document.body).appendChild(el);
+  }
+  return el;
+}
+
+let insightsHideTimer;
+function showInsightsMsg(text, type, hide=false) {
   const msg = ensureInsightsMsgEl();
   msg.textContent = text || '';
-  msg.className = 'lookup-message' + (type ? (' ' + type) : '');
+  msg.className = 'lookup-message ' + (type || '');
+  msg.id = 'insights-message';
   msg.style.display = hide ? 'none' : 'inline-block';
+  clearTimeout(insightsHideTimer);
+  if (!hide && text) insightsHideTimer = setTimeout(() => msg.style.display='none', 15000);
 }
 
 });

@@ -1060,3 +1060,46 @@ footer a{ color: var(--grad-start); }
   flex: 1 1 100px;
   max-width: 140px;
 }
+/* Layout for League Data Lookup */
+.lookup-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  align-items: start;
+  margin-top: 20px;
+}
+
+.lookup-left {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.lookup-right {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.lookup-form-container label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.lookup-form-container input,
+.lookup-form-container select {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .lookup-layout {
+    grid-template-columns: 1fr;
+  }
+}

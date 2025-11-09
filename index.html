@@ -26,61 +26,59 @@
       <button class="tab-btn" data-tab="fun">Fun Facts About Me</button>
     </div>
 
-    <!-- Tab Content Area -->
-    <div class="tab-content">
-      <!-- League Lookup Tab -->
-      <div id="tab-league" class="tab-panel active">
-        <h3>League Data Lookup</h3>
-        <p>Enter a Riot ID to see their level, top champions, and insights.</p>
+  <section id="league-lookup" class="league-lookup">
+  <h3>League Data Lookup</h3>
+  <p>Enter a Riot ID to see their level, top champions, and insights!</p>
 
-        <div id="lookup-message" class="lookup-message" style="display: none;"></div>
+  <div class="lookup-layout">
+    <!-- LEFT: Lookup form -->
+    <div class="lookup-left">
+      <div id="lookup-message" class="lookup-message" style="display:none;"></div>
 
-        <div class="lookup-form-container">
-          <div class="form-group">
-            <label for="summoner-name">Riot ID</label>
-            <input type="text" id="summoner-name" name="summoner-name" placeholder="GameName#TAG" required>
-            <small style="color: #687078;">Format: GameName#TAG</small>
-          </div>
-
-          <div class="form-group">
-            <label for="region">Region</label>
-            <select id="region" name="region">
-              <option value="na1">NA</option>
-              <option value="euw1" selected>EUW</option>
-              <option value="eun1">EUNE</option>
-              <option value="kr">Korea</option>
-            </select>
-          </div>
-
-          <div class="form-actions">
-            <button type="button" id="lookup-btn" class="lookup-submit-btn">Look Up Summoner</button>
-            <button type="button" id="insights-btn" class="lookup-submit-btn secondary">Analyze Player</button>
-            <span id="insights-message" class="lookup-message" style="display:none;"></span>
-          </div>
+      <div class="lookup-form-container">
+        <div class="form-group">
+          <label for="summoner-name">Riot ID</label>
+          <input type="text" id="summoner-name" placeholder="GameName#TAG (e.g., Hide on bush#KR1)" required>
+          <small>Format: GameName#TAG</small>
         </div>
+        <div class="form-group">
+          <label for="region">Region</label>
+          <select id="region">
+            <option value="na1">North America</option>
+            <option value="euw1">Europe West</option>
+            <option value="eun1">Europe Nordic & East</option>
+            <option value="kr">Korea</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button type="button" id="lookup-btn" class="lookup-submit-btn">Look Up Summoner</button>
+          <button type="button" id="analyze-btn" class="analyze-btn">Analyze Player</button>
+        </div>
+      </div>
+    </div>
 
-        <div id="summoner-results" class="summoner-results" style="display:none;">
+    <!-- RIGHT: Results -->
+    <div class="lookup-right">
+      <div id="summoner-results" class="summoner-results" style="display:none;">
         <div id="summary-row" class="summary-row">
-
-          <!-- Left: Summoner Info + Top Champs -->
           <div class="summary-col">
             <h4>Summoner Info</h4>
             <div id="summoner-info"></div>
-            <div id="champion-mastery"></div>  <!-- ← THIS must exist -->
+            <div id="champion-mastery"></div>
           </div>
 
-          <!-- Right: Player Insights -->
           <div id="player-insights" class="summary-col" style="display:none;">
             <h4>Player Insights</h4>
             <div id="insights-summary"></div>
             <div id="insights-tips"></div>
           </div>
-
         </div>
-        </div>
-
       </div>
+    </div>
+  </div>
+</section>
 
+          
       <!-- AWS Builder Tab -->
       <div id="tab-aws" class="tab-panel">
         <h3>My AWS Builder Profile</h3>
@@ -347,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
       renderInsights(payload);
-      document.getElementById('player-insights').style.display = 'block';
+      document.getElementById('player-insights').style.display = 'block'; //very important!
       showInsightsMsg('Insights ready!', 'success');
 
     } catch (e) {

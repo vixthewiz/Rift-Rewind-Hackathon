@@ -1395,3 +1395,27 @@ main {
 #champion-mastery > div{
   margin: 0 !important;
 }
+/* Top Champions: 3 cards, one row */
+.hero .tab-content #champion-mastery .champions-grid{
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(220px, 1fr)) !important;
+  gap: 16px !important;
+  align-items: stretch;
+}
+.hero .tab-content #champion-mastery .champions-grid > *:nth-child(n+4){
+  display: none !important; /* hide 4th+ */
+}
+/* keep heading tight */
+.hero .tab-content #champion-mastery h5{ margin: 0 0 10px; }
+
+/* Responsive: on smaller screens, let it drop to 2 or 1 columns */
+@media (max-width: 1100px){
+  .hero .tab-content #champion-mastery .champions-grid{
+    grid-template-columns: repeat(2, minmax(200px, 1fr)) !important;
+  }
+}
+@media (max-width: 640px){
+  .hero .tab-content #champion-mastery .champions-grid{
+    grid-template-columns: 1fr !important;
+  }
+}

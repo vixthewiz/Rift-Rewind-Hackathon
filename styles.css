@@ -1916,3 +1916,19 @@ main {
   flex-shrink: 0;
   border-radius: 4px;
 }
+
+:root{
+  --page-gutter: 28px;   /* can be tweaked until it visually matches tabs row */
+}
+
+/* the wrapper around the two cards */
+.league-layout{
+  max-width: 1200px;     /* or site’s content max */
+  margin: 0 auto;
+  padding-left: var(--page-gutter);
+  padding-right: var(--page-gutter);
+  display: grid;
+  grid-template-columns: clamp(360px, 32vw, 480px) minmax(0,1fr);
+  gap: 28px;
+  align-items: start;
+}

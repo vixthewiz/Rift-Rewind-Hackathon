@@ -1419,3 +1419,42 @@ main {
     grid-template-columns: 1fr !important;
   }
 }
+/* Ensure heading sits above the champions row */
+.hero .tab-content #champion-mastery{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px; /* space between heading and champs */
+}
+
+/* Now target only the grid of champions, not the whole container */
+.hero .tab-content #champion-mastery .champions-grid{
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(220px, 1fr)) !important;
+  gap: 16px !important;
+  align-items: start;
+}
+
+/* Hide extra champs beyond top 3 */
+.hero .tab-content #champion-mastery .champions-grid > *:nth-child(n+4){
+  display: none !important;
+}
+
+/* Heading styling */
+.hero .tab-content #champion-mastery h5{
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 1100px){
+  .hero .tab-content #champion-mastery .champions-grid{
+    grid-template-columns: repeat(2, minmax(200px, 1fr)) !important;
+  }
+}
+@media (max-width: 640px){
+  .hero .tab-content #champion-mastery .champions-grid{
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -1558,3 +1558,49 @@ footer a{ color: var(--grad-start); }
     position: static;
   }
 }
+/* Fix champion cards layout to display horizontally */
+#champion-mastery {
+  display: flex !important; /* Force horizontal layout */
+  flex-direction: row !important; /* Ensure horizontal */
+  flex-wrap: nowrap !important; /* Prevent wrapping */
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  overflow-x: auto; /* Allow horizontal scroll if needed */
+}
+
+/* Make champion cards more compact and consistent width */
+.champion-card {
+  flex: 0 0 auto !important; /* Prevent shrinking/growing */
+  width: 200px !important; /* Fixed width */
+  min-width: 200px !important; /* Ensure minimum width */
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+}
+
+/* Champion info text container */
+.champion-card .champ-info {
+  flex: 1;
+  min-width: 0; /* Allow text to wrap */
+}
+
+/* Ensure champion icons stay consistent size */
+.champion-card img.champ-icon {
+  width: 48px !important;
+  height: 48px !important;
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+/* Optional: Add smooth scrolling for overflow */
+#champion-mastery {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar but keep functionality */
+#champion-mastery::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}

@@ -1686,3 +1686,48 @@ footer a{ color: var(--grad-start); }
   min-width: 0;
   font-size: 0.85rem;
 }
+
+/* Force champions into a single row with fixed widths */
+#champion-mastery {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 12px;
+  padding: 10px 0;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Make champion cards fixed size */
+.champion-card {
+  flex: 0 0 150px !important; /* Even smaller fixed width */
+  min-width: 150px !important;
+  max-width: 150px !important;
+  height: 70px !important; /* Fixed height */
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 8px !important;
+  margin: 0 !important;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+/* Keep champion icons small and consistent */
+.champion-card img.champ-icon {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+/* Adjust text content */
+.champion-card .champ-info {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}

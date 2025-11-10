@@ -1458,3 +1458,49 @@ main {
     grid-template-columns: 1fr !important;
   }
 }
+/* Top Champions: heading on its own row, 3 cards beneath it */
+.hero .tab-content #champion-mastery{
+  display: grid !important;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;   /* row 1 = title, row 2 = cards */
+  row-gap: 10px;
+  align-items: start;
+}
+
+/* Make sure the title occupies row 1 and isn't positioned oddly */
+.hero .tab-content #champion-mastery h5{
+  grid-column: 1 / -1 !important;
+  grid-row: 1 !important;
+  position: static !important;
+  margin: 0 !important;
+  text-align: center;
+  z-index: 1;
+}
+
+/* Cards container occupies row 2 and lays out 3 across */
+.hero .tab-content #champion-mastery .champions-grid{
+  grid-column: 1 / -1 !important;
+  grid-row: 2 !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(220px, 1fr)) !important;
+  gap: 16px !important;
+  align-items: start;
+  margin: 0 !important;
+}
+
+/* Hide any beyond top 3 for a clean single line */
+.hero .tab-content #champion-mastery .champions-grid > *:nth-child(n+4){
+  display: none !important;
+}
+
+/* Responsive: 2 across / 1 across as needed */
+@media (max-width: 1100px){
+  .hero .tab-content #champion-mastery .champions-grid{
+    grid-template-columns: repeat(2, minmax(200px, 1fr)) !important;
+  }
+}
+@media (max-width: 640px){
+  .hero .tab-content #champion-mastery .champions-grid{
+    grid-template-columns: 1fr !important;
+  }
+}

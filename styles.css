@@ -1493,3 +1493,68 @@ footer a{ color: var(--grad-start); }
   width: 100%;
   min-width: 0;
 }
+
+/* Force minimal width for lookup section */
+.league-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr !important; /* Force smaller left column */
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Constrain left column */
+.league-left {
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+  position: sticky;
+  top: 20px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* Give right column maximum space */
+.league-right {
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+}
+
+/* Make summary row single column */
+.summary-row {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px;
+  width: 100%;
+}
+
+.summary-col {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Keep content from overflowing */
+#summoner-info,
+#player-insights {
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .league-layout {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .league-left {
+    width: 100% !important;
+    position: static;
+  }
+}

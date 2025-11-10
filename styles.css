@@ -1426,3 +1426,70 @@ footer a{ color: var(--grad-start); }
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+/* Simplified League Layout */
+.league-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr; /* Fixed width for left column */
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Left column - fixed width */
+.league-left {
+  width: 300px;
+  position: sticky;
+  top: 20px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+/* Right column - flexible width */
+.league-right {
+  width: 100%;
+  min-width: 0; /* Prevents overflow */
+}
+
+/* Summary row layout */
+.summary-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Summary columns */
+.summary-col {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .league-layout {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+  
+  .league-left {
+    width: 100%;
+    position: static;
+  }
+}
+
+/* Form actions layout */
+.form-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.lookup-submit-btn {
+  width: 100%;
+  min-width: 0;
+}

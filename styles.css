@@ -354,22 +354,9 @@ footer a{ color: var(--grad-start); }
 }
 
 /* CTA */
-.lookup-submit-btn{
-  display: block;
-  margin: 6px auto 0;
-  padding: 12px 28px;
-  font-weight: 600;
-  font-size: 16px;
-  border: 0;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  color: #fff;
-  background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
-  box-shadow: 0 10px 28px rgba(110,87,166,.30);
-  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
-}
-.lookup-submit-btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 34px rgba(215,169,235,.38); }
-.lookup-submit-btn:disabled{ opacity:.6; cursor:not-allowed; transform:none; box-shadow:none; }
+
+
+
 
 /* flash messages — themed (no red/green clash) */
 .lookup-message{
@@ -424,14 +411,8 @@ footer a{ color: var(--grad-start); }
   display: grid; gap: 16px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
-.champion-card{
-  background: rgba(255,255,255,.02);
-  border: 1px solid rgba(255,255,255,.08);
-  border-left: 4px solid var(--grad-end);
-  border-radius: var(--radius-md);
-  padding: 16px;
-}
-.champion-card p{ margin: 4px 0; font-size: 14px; color: var(--muted); }
+
+
 
 /* mobile */
 @media (max-width: 768px){
@@ -440,26 +421,13 @@ footer a{ color: var(--grad-start); }
 }
 
 /* League icons */
-.league-lookup .champion-card {
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  gap: 12px;
-  align-items: center;
-}
-.league-lookup .champion-card .champ-icon{
-  border-radius: 8px;
-  box-shadow: 0 6px 16px rgba(0,0,0,.35);
-}
-.league-lookup .champion-card p { margin: 0; }
-.league-lookup .champion-card p + p { margin-top: 2px; }
+.league-lookup 
+.league-lookup 
+.league-lookup 
+.league-lookup 
 
 .league-lookup .champions-grid{ gap:16px }
-.league-lookup .champion-card{
-  display:grid;
-  grid-template-columns: 64px 1fr;
-  gap:12px;
-  align-items:center;
-}
+.league-lookup 
 /* --- Tabs --- */
 .tab-bar {
   display: flex;
@@ -491,7 +459,7 @@ footer a{ color: var(--grad-start); }
 .tab-content {
   margin-top: 24px;
   text-align: left;
-  max-width: 700px;
+  max-width: none;
   margin-inline: auto;
 }
 .tab-panel {
@@ -507,13 +475,8 @@ footer a{ color: var(--grad-start); }
 }
 
 /* --- Buttons --- */
-.lookup-submit-btn.secondary {
-  background: #444;
-  margin-left: 10px;
-}
-.lookup-submit-btn.secondary:hover {
-  background: #555;
-}
+
+
 
 /* --- Lists & content tweaks --- */
 .fun-list {
@@ -528,43 +491,22 @@ footer a{ color: var(--grad-start); }
 }
 
 /* 1) Make all primary buttons larger (tab buttons included) */
-.lookup-submit-btn,
-.tab-btn {
-  padding: 12px 18px;
-  font-size: 16px;
-  line-height: 1.1;
-  border-radius: 10px;
-  min-width: 190px;
-  font-weight: 600;
-}
+
 
 /* Secondary (grey) variant still a touch darker on hover */
-.lookup-submit-btn.secondary {
-  background: #444;
-}
-.lookup-submit-btn.secondary:hover {
-  background: #555;
-}
+
+
 
 /* 2) Center all tab-panel content (was left-aligned) */
 .tab-content { text-align: center; }
 .tab-panel { text-align: center; }
 
 /* 3) Put "Analyze Player" right next to "Look Up Summoner" */
-.form-actions {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
+
 
 /* 4) Center the section headings for results */
 #summoner-results h4,
-#player-insights h4 {
-  text-align: center;
-  margin-bottom: 10px;
-}
+
 
 /* 5) Fix champion cards layout and width so they don’t look cramped */
 .champions-grid {
@@ -574,22 +516,9 @@ footer a{ color: var(--grad-start); }
   margin-top: 10px;
 }
 
-.champion-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
 
-.champion-card img.champ-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 8px;
-  object-fit: cover;
-}
+
+
 
 /* 6) Slightly larger tab bar buttons to match primary CTAs visually */
 .tab-bar { 
@@ -681,11 +610,7 @@ footer a{ color: var(--grad-start); }
 }
 
 #summoner-results,
-#player-insights {
-  margin-top: 28px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-}
+
 
 /* Slight padding inside the champion cards grid */
 .champions-grid {
@@ -695,10 +620,7 @@ footer a{ color: var(--grad-start); }
 
 /* Adds visual spacing between different sections inside League tab */
 #summoner-results h4,
-#player-insights h4 {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
+
 
 /* Slightly more separation between the “hero” header and tab bar */
 .hero .tab-bar {
@@ -745,41 +667,15 @@ footer a{ color: var(--grad-start); }
 }
 
 /* Individual champion card refinement */
-.champion-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  width: 200px;
-  box-sizing: border-box;
-  transition: background 0.3s, transform 0.2s;
-}
-.champion-card:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-}
+
+
 
 /* Champion icon consistency */
-.champion-card img.champ-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 6px;
-  object-fit: cover;
-}
+
 
 /* Champion text size tweaks */
-.champion-card strong {
-  display: block;
-  font-size: 0.95rem;
-  color: #fff;
-}
-.champion-card .subtle {
-  font-size: 0.85rem;
-  color: #ccc;
-}
+
+
 /* --- Summoner Results Cleanup --- */
 
 /* Make result cards more compact and aligned */
@@ -819,41 +715,15 @@ footer a{ color: var(--grad-start); }
 }
 
 /* Individual champion card refinement */
-.champion-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  width: 200px;
-  box-sizing: border-box;
-  transition: background 0.3s, transform 0.2s;
-}
-.champion-card:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-}
+
+
 
 /* Champion icon consistency */
-.champion-card img.champ-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 6px;
-  object-fit: cover;
-}
+
 
 /* Champion text size tweaks */
-.champion-card strong {
-  display: block;
-  font-size: 0.95rem;
-  color: #fff;
-}
-.champion-card .subtle {
-  font-size: 0.85rem;
-  color: #ccc;
-}
+
+
 /* --- Summoner Card Glow Effect --- */
 .summoner-card {
   background: rgba(255, 255, 255, 0.04);
@@ -913,153 +783,65 @@ footer a{ color: var(--grad-start); }
   transform: translateY(-1px);
 }
 /* Inline status chip next to buttons */
-.form-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 
-#insights-message {
-  display: none;
-  padding: 6px 10px;
-  font-size: 13px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #ddd;
-  box-shadow: none;     /* don't look like a button */
-  line-height: 1;
-}
+
+
 
 /* success/error colors */
-#insights-message.success { color: #b5ffc3; border-color: rgba(0,255,120,0.25); }
-#insights-message.error   { color: #ffc1c1; border-color: rgba(255,80,80,0.25); }
+
+
 
 /* Side-by-side row for Summoner + Insights (stacks on mobile) */
-.summary-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  align-items: start;
-  margin: 12px 0 20px;
-}
+
 @media (max-width: 900px) {
-  .summary-row { grid-template-columns: 1fr; }
+  
 }
-.form-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-#insights-message{
-  display:none;padding:6px 10px;font-size:13px;border-radius:999px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
-  color:#ddd;line-height:1;position:relative;top:4px; /* nudges it down to match buttons  */
-}
-#insights-message.success{color:#b5ffc3;border-color:rgba(0,255,120,.25)}
-#insights-message.error{color:#ffc1c1;border-color:rgba(255,80,80,.25)}
+
+
+
+
 
 /* --- Summoner Info + Player Insights side-by-side layout --- */
-.summary-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  align-items: start;
-  justify-items: center;
-  margin: 20px auto 30px;
-  max-width: 900px;
-}
 
-.summary-col {
-  width: 100%;
-  max-width: 400px;
-}
+
+
 
 /* make sure each column card takes full width within its grid cell */
-.summary-col .summoner-card,
-#player-insights .summoner-card {
-  width: 100%;
-}
+
 /* --- FORCE two-column layout on desktop, equal widths --- */
-.summary-row{
-  display:grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap:24px !important;
-  align-items: stretch;           /* make both columns equal height if possible */
-  justify-items: stretch;
-  max-width: 1100px;              /* room for two cards on 1366px screens */
-  margin: 20px auto 28px;
-}
+
 
 /* each side should fill its grid cell */
-.summary-col{
-  width:100% !important;
-  max-width:none !important;
-}
+
 
 /* make sure the “card” inside each column expands */
-.summary-col .summoner-card,
-#summoner-info .summoner-card,
-#player-insights .summoner-card{
-  width:100% !important;
-  height:auto;
-  box-sizing:border-box;
-}
+
 
 /* the insights column should not be narrower */
-#player-insights{ width:100% !important; }
+
 
 /* below 900px, stack vertically (mobile/tablet) */
 @media (max-width: 900px){
-  .summary-row{
-    grid-template-columns: 1fr !important;
-    max-width: 720px;
-  }
+  
 }
-.summary-row{
-  display:grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap:24px !important;
-  align-items: stretch;
-  justify-items: stretch;
-  max-width: 1100px;
-  margin: 20px auto 28px;
-}
-.summary-col{ width:100% !important; max-width:none !important; }
-#player-insights{ width:100% !important; }
+
+
+
 
 @media (max-width: 900px){
-  .summary-row{
-    grid-template-columns: 1fr !important;
-    max-width: 720px;
-  }
-}
-.summary-row {
-  display: grid !important;
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 24px !important;
-  align-items: start;
-  justify-items: stretch;
-  max-width: 1100px;
-  margin: 20px auto 28px;
+  
 }
 
-.summary-col {
-  width: 100% !important;
-  max-width: none !important;
-}
+
+
 
 /* Mobile stacking */
 @media (max-width: 900px) {
-  .summary-row {
-    grid-template-columns: 1fr !important;
-    max-width: 720px;
-  }
-}
-#champion-mastery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 8px;
+  
 }
 
-#champion-mastery .champion-card {
-  flex: 1 1 100px;
-  max-width: 140px;
-}
+
+
 /* Layout for League Data Lookup */
 .lookup-layout {
   display: grid;
@@ -1104,57 +886,27 @@ footer a{ color: var(--grad-start); }
   }
 }
 /* Outer two-column layout for League panel */
-.league-layout {
-  display: grid;
-  grid-template-columns: 380px 1fr; /* left lookup block, right results */
-  gap: 24px;
-  align-items: start;
-}
+
 
 /* Make the left block feel like a card and keep it visible while scrolling results */
-.league-left {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  padding: 16px;
-  position: sticky;
-  top: 16px; /* adjust if your header spacing differs */
-}
+
 
 /* Right column just inherits your existing card styles inside */
-.league-right { min-width: 0; }
+
 
 /* Responsive: stack on small screens */
 @media (max-width: 900px) {
-  .league-layout {
-    grid-template-columns: 1fr;
-  }
-  .league-left {
-    position: static;
-  }
+  
+  
 }
 /* --- League two-column layout tuning --- */
-.league-layout{
-  /* Left column smaller, right gets the rest */
-  display: grid;
-  grid-template-columns: clamp(260px, 20vw, 340px) minmax(0,1fr);
-  gap: 20px;                 /* a bit tighter gap so the right gains space */
-  align-items: start;
-  width: 100%;
-}
+
 
 /* Keep the left block “on the left” and compact */
-.league-left{
-  position: sticky;
-  top: 16px;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  padding: 16px;
-}
+
 
 /* Right column: allow content to stretch fully */
-.league-right{ min-width: 0; }
+
 
 /* Inside the right column, keep Summoner Info + Player Insights side-by-side */
 #summary-row{
@@ -1170,115 +922,48 @@ footer a{ color: var(--grad-start); }
 
 /* Mobile: stack */
 @media (max-width: 900px){
-  .league-layout{ grid-template-columns: 1fr; }
-  .league-left{ position: static; }
+  
+  
   #summary-row{ grid-template-columns: 1fr; }
 }
 
 /* --- Button alignment --- */
 /* Put both buttons in a 2-column grid and make them equal width */
-.form-actions{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  align-items: stretch;
-}
+
 
 /* Ensure both buttons fill their grid cell identically */
-.lookup-submit-btn{
-  width: 100%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  height: 44px;         /* consistent height */
-  padding: 0 14px;      /* consistent horizontal padding */
-  box-sizing: border-box;
-}
+
 
 /* Optional: keep disabled button size identical */
-.lookup-submit-btn:disabled{
-  opacity: 0.6;
-  cursor: not-allowed;
-}
+
 /* 1) Give the left card more width; right side gets the rest */
-.league-layout{
-  display: grid;
-  /* Wider left: grows with viewport but never tiny */
-  grid-template-columns: clamp(360px, 32vw, 480px) minmax(0,1fr);
-  gap: 28px;       /* room so shadows/glows don't visually collide */
-  align-items: start;
-  width: 100%;
-}
+
 
 /* 2) Ensure inputs stretch to the card width */
-.league-left input,
-.league-left select{
-  width: 100%;
-  box-sizing: border-box;
-}
+
 
 /* 3) Buttons: keep aligned */
-.form-actions{
-  display: grid;
-  grid-template-columns: 1fr 1fr;  /* two equal columns, no wrapping */
-  gap: 12px;
-  margin-bottom: 32px;              /* space for the badge */
-  align-items: stretch;
-  justify-items: stretch;
-}
 
-.lookup-submit-btn{
-  width: 100%;
-  min-width: 0;             /* prevents overflow */
-  height: 44px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 14px;
-  box-sizing: border-box;
-}
+
+
 
 /* Optional: tone down visual overlap from glows on hover */
-.lookup-submit-btn:hover{
-  filter: brightness(1.02);
-}
+
 
 /* Mobile: stack columns */
 @media (max-width: 900px){
-  .league-layout{ grid-template-columns: 1fr; }
-  #insights-message{
-    left: 50%;
-    transform: translateX(-50%);
-  }
+  
+  
 }
 
 /* --- Position "Insights ready!" directly under Analyze Player --- */
-.form-actions {
-  position: relative;   /* create positioning context */
-}
+
 
 /* style for the green message */
-#insights-message {
-  position: absolute;
-  top: calc(100% + 6px);            /* below the buttons */
-  left: 75%;                        /* center of the right-half (Analyze) */
-  transform: translateX(-50%);      /* true center under that button */
-  display: inline-block;
-  background: rgba(0, 255, 100, 0.12);
-  border: 1px solid rgba(0, 255, 100, 0.3);
-  color: #7fffb7;
-  font-size: 0.85rem;
-  padding: 4px 10px;
-  border-radius: 8px;
-  white-space: nowrap;
-  pointer-events: none;             /* never block clicks even if close */
-  z-index: 0;
-}
+
 
 /* optional subtle animation when it appears */
-#insights-message.show {
-  animation: fadeIn 0.4s ease;
-}
+
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateX(50%) translateY(8px); }
@@ -1286,14 +971,7 @@ footer a{ color: var(--grad-start); }
 }
 
 /* 1) Give the right side more width */
-.league-layout{
-  display: grid;
-  /* Make left a bit slimmer, right gets the rest */
-  grid-template-columns: clamp(300px, 22vw, 360px) minmax(0, 1fr);
-  gap: 28px;
-  align-items: start;
-  width: 100%;
-}
+
 
 /* 2) Inside the right column, give Insights the bigger share */
 #summary-row{
@@ -1308,46 +986,26 @@ footer a{ color: var(--grad-start); }
 }
 
 /* 3) Player Insights: auto multi-column layout to reduce vertical scroll */
-#player-insights{
-  column-gap: 22px;
-}
+
 @media (min-width: 1100px){
-  #player-insights{ column-count: 2; }
+  
 }
 @media (min-width: 1600px){
-  #player-insights{ column-count: 3; }
+  
 }
 /* Prevent cards/paragraphs from splitting between columns */
-#player-insights > *{
-  break-inside: avoid;
-  page-break-inside: avoid;
-  margin-bottom: 14px; /* spacing between blocks */
-}
+
 
 /* 4) Top Champions: turn the list into a responsive grid */
-#champion-mastery{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
-}
-#champion-mastery .champ-card,
-#champion-mastery > div{
-  margin: 0;             /* kill old vertical margins so the grid is tight */
-}
+
+
 
 /* 5) Make sure the right card can truly stretch */
-.league-right{ min-width: 0; }
-.league-right .summoner-results,
-.league-right .summary-col{ width: 100%; }
+
+
 
 /* ————— keep the LEFT column as before ————— */
-.league-layout{
-  display: grid;
-  grid-template-columns: clamp(360px, 32vw, 480px) minmax(0,1fr);
-  gap: 28px;
-  align-items: start;
-  width: 100%;
-}
+
 
 /* ————— RIGHT column: 4 stacked rows ————— */
 /* Make the right side use a single column with vertical sections */
@@ -1358,379 +1016,142 @@ footer a{ color: var(--grad-start); }
 }
 
 /* Row 1: Summoner Info card (no change needed, just ensure spacing is tight) */
-#summoner-info{ margin: 0; }
+
 
 /* Row 2: Top champions — show ONLY top 3 in one row */
-#champion-mastery{
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin: 0;  /* avoid pushing content down */
-}
-#champion-mastery > *:nth-child(n+4){
-  display: none;  /* hide 4th+ so it's one clean line */
-}
+
+
 
 /* Optional: if your champ items have internal margins, neutralize them in the grid */
-#champion-mastery .champ-card,
-#champion-mastery > div{
-  margin: 0;
-}
+
 
 /* Row 3: Player Insights — full width, no multi-column wrapping */
-#player-insights{
-  column-count: initial;   /* cancel previous multi-column rules if any */
-  column-gap: 0;
-  margin: 0;
-}
+
 
 /* Row 4: Coaching tips — full width and aligned with insights */
-#insights-tips{
-  margin: 0;
-}
+
 
 /* Minor polish so sections read as one vertical flow inside the right card */
-.league-right h4{ margin-top: 0; }
+
 
 /* Adjust the league layout grid */
-.league-layout {
-  display: grid;
-  grid-template-columns: minmax(250px, 25%) 1fr; /* Change from 300px to 250px and 25% */
-  gap: 2rem;
-  width: 100%;
-  margin: 0 auto;
-}
+
 
 /* Make the lookup form container more compact */
-.league-left {
-  min-width: 250px; /* Reduced from 300px */
-  padding: 1rem;
-}
+
 
 /* Give more space to results */
-.league-right {
-  flex: 1;
-  min-width: 0; /* Allows content to shrink below min-width */
-}
+
 
 /* Adjust the summary row layout */
-.summary-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
+
 
 /* Prevent horizontal scrolling in summary columns */
-.summary-col {
-  min-width: 0;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
+
 /* Simplified League Layout */
-.league-layout {
-  display: grid;
-  grid-template-columns: 300px 1fr; /* Fixed width for left column */
-  gap: 24px;
-  align-items: start;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 16px;
-}
+
 
 /* Left column - fixed width */
-.league-left {
-  width: 300px;
-  position: sticky;
-  top: 20px;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  padding: 16px;
-}
+
 
 /* Right column - flexible width */
-.league-right {
-  width: 100%;
-  min-width: 0; /* Prevents overflow */
-}
+
 
 /* Summary row layout */
-.summary-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  width: 100%;
-}
+
 
 /* Summary columns */
-.summary-col {
-  width: 100%;
-  min-width: 0;
-}
+
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
-  .league-layout {
-    grid-template-columns: 1fr;
-    padding: 0;
-  }
   
-  .league-left {
-    width: 100%;
-    position: static;
-  }
+  
+  
 }
 
 /* Form actions layout */
-.form-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 16px;
-}
 
-.lookup-submit-btn {
-  width: 100%;
-  min-width: 0;
-}
+
+
 
 /* Force minimal width for lookup section */
-.league-layout {
-  display: grid;
-  grid-template-columns: 280px 1fr !important; /* Force smaller left column */
-  gap: 24px;
-  align-items: start;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-}
+
 
 /* Constrain left column */
-.league-left {
-  width: 280px !important;
-  min-width: 280px !important;
-  max-width: 280px !important;
-  position: sticky;
-  top: 20px;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  padding: 16px;
-}
+
 
 /* Give right column maximum space */
-.league-right {
-  width: 100%;
-  min-width: 0;
-  flex: 1;
-}
+
 
 /* Make summary row single column */
-.summary-row {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 20px;
-  width: 100%;
-}
 
-.summary-col {
-  width: 100% !important;
-  max-width: none !important;
-}
+
+
 
 /* Keep content from overflowing */
-#summoner-info,
-#player-insights {
-  width: 100%;
-  max-width: 100%;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-}
+
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
-  .league-layout {
-    grid-template-columns: 1fr !important;
-  }
   
-  .league-left {
-    width: 100% !important;
-    position: static;
-  }
+  
+  
 }
 /* Fix champion cards layout to display horizontally */
-#champion-mastery {
-  display: flex !important; /* Force horizontal layout */
-  flex-direction: row !important; /* Ensure horizontal */
-  flex-wrap: nowrap !important; /* Prevent wrapping */
-  justify-content: flex-start;
-  gap: 12px;
-  padding: 10px 0;
-  overflow-x: auto; /* Allow horizontal scroll if needed */
-}
+
 
 /* Make champion cards more compact and consistent width */
-.champion-card {
-  flex: 0 0 auto !important; /* Prevent shrinking/growing */
-  width: 200px !important; /* Fixed width */
-  min-width: 200px !important; /* Ensure minimum width */
-  display: flex !important;
-  align-items: center;
-  gap: 10px;
-  padding: 12px;
-}
+
 
 /* Champion info text container */
-.champion-card .champ-info {
-  flex: 1;
-  min-width: 0; /* Allow text to wrap */
-}
+
 
 /* Ensure champion icons stay consistent size */
-.champion-card img.champ-icon {
-  width: 48px !important;
-  height: 48px !important;
-  flex-shrink: 0; /* Prevent icon from shrinking */
-}
+
 
 /* Optional: Add smooth scrolling for overflow */
-#champion-mastery {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
+
 
 /* Hide scrollbar but keep functionality */
-#champion-mastery::-webkit-scrollbar {
-  height: 0;
-  width: 0;
-}
+
 /* Center Top Champions heading and improve champion layout */
-#summoner-info h4 {
-  text-align: center;
-  width: 100%;
-  margin: 20px 0;
-  font-size: 1.2rem;
-  color: var(--text);
-}
+
 
 /* Make champion mastery container display champions properly */
-#champion-mastery {
-  display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
-  gap: 12px;
-  width: 100%;
-  padding: 10px;
-  justify-content: center;
-}
+
 
 /* Individual champion card adjustments */
-.champion-card {
-  display: flex !important;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  width: auto !important;
-  min-width: 0 !important;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-}
+
 
 /* Champion icon sizing */
-.champion-card img.champ-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 6px;
-  flex-shrink: 0;
-}
+
 
 /* Champion info text */
-.champion-card .champ-info {
-  flex: 1;
-  min-width: 0;
-  font-size: 0.9rem;
-}
+
 /* Force champions into a single row */
-#champion-mastery {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  justify-content: center !important;
-  gap: 12px;
-  padding: 10px 0;
-  width: 100%;
-}
+
 
 /* Make champion cards smaller and more compact */
-.champion-card {
-  flex: 0 0 160px !important; /* Reduce width to fit all cards */
-  min-width: 160px !important;
-  max-width: 160px !important;
-  display: flex !important;
-  align-items: center;
-  gap: 8px;
-  padding: 10px;
-  margin: 0 !important;
-}
+
 
 /* Adjust champion icon size */
-.champion-card img.champ-icon {
-  width: 40px !important;
-  height: 40px !important;
-  flex-shrink: 0;
-}
+
 
 /* Adjust text size */
-.champion-card .champ-info {
-  flex: 1;
-  min-width: 0;
-  font-size: 0.85rem;
-}
+
 
 /* Force champions into a single row with fixed widths */
-#champion-mastery {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 12px;
-  padding: 10px 0;
-  width: 100%;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-}
+
 
 /* Make champion cards fixed size */
-.champion-card {
-  flex: 0 0 150px !important; /* Even smaller fixed width */
-  min-width: 150px !important;
-  max-width: 150px !important;
-  height: 70px !important; /* Fixed height */
-  display: flex !important;
-  align-items: center;
-  gap: 8px;
-  padding: 8px !important;
-  margin: 0 !important;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-}
+
 
 /* Keep champion icons small and consistent */
-.champion-card img.champ-icon {
-  width: 36px !important;
-  height: 36px !important;
-  border-radius: 4px;
-  flex-shrink: 0;
-}
+
 
 /* Adjust text content */
-.champion-card .champ-info {
-  flex: 1;
-  min-width: 0;
-  font-size: 0.8rem;
-  line-height: 1.2;
-}
+
 /* Expand the main container width */
 main {
   max-width: 1400px !important; /* Increased from 1200px */
@@ -1748,27 +1169,13 @@ main {
 }
 
 /* Adjust the two-column layout to use more space */
-.league-layout {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 32px;
-  width: 100%;
-  max-width: none;
-}
+
 
 /* Ensure summary row takes full width */
-.summary-row {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
+
 
 /* Make sure columns take full available width */
-.summary-col {
-  width: 100%;
-  min-width: 0;
-}
+
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
@@ -1777,158 +1184,121 @@ main {
   }
 }
 /* Right side champion mastery layout */
-#champion-mastery {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  gap: 16px;
-  padding: 16px 0;
-  width: 100%;
-}
+
 
 /* Champion card sizing and layout */
-.champion-card {
-  flex: 1 1 0 !important; /* Equal width distribution */
-  min-width: 160px !important;
-  max-width: 200px !important;
-  height: auto !important;
-  display: flex !important;
-  align-items: center;
-  gap: 12px;
-  padding: 12px !important;
-  margin: 0 !important;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-}
+
 
 /* Champion icons */
-.champion-card img.champ-icon {
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 4px;
-  flex-shrink: 0;
-}
+
 
 /* Champion info text */
-.champion-card .champ-info {
-  flex: 1;
-  min-width: 0;
-  font-size: 0.9rem;
-  line-height: 1.2;
-}
+
 
 /* Ensure parent container has proper width */
-.summary-col {
-  width: 100%;
-}
+
 /* Force single row layout with equal spacing */
-#champion-mastery {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  justify-content: space-evenly !important; /* Changed to space-evenly */
-  align-items: center !important;
-  gap: 16px;
-  width: 100%;
-  padding: 16px 0;
-}
+
 
 /* Make cards distribute evenly */
-.champion-card {
-  flex: 1 !important;
-  min-width: 140px !important;
-  max-width: 180px !important;
-  height: auto !important;
-  display: flex !important;
-  align-items: center;
-  gap: 8px;
-  padding: 12px !important;
-  margin: 0 !important;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-}
+
 
 /* Prevent text overflow */
-.champion-card .champ-info {
-  flex: 1;
-  min-width: 0;
-  font-size: 0.85rem;
-  line-height: 1.2;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+
 
 /* Keep icons consistent */
-.champion-card img.champ-icon {
-  width: 40px !important;
-  height: 40px !important;
-  flex-shrink: 0;
-  border-radius: 4px;
-}
+
 /* Force single row layout with equal spacing */
-#champion-mastery {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  justify-content: space-evenly !important; /* Changed to space-evenly */
-  align-items: center !important;
-  gap: 16px;
-  width: 100%;
-  padding: 16px 0;
-}
+
 
 /* Make cards distribute evenly */
-.champion-card {
-  flex: 1 !important;
-  min-width: 140px !important;
-  max-width: 180px !important;
-  height: auto !important;
-  display: flex !important;
-  align-items: center;
-  gap: 8px;
-  padding: 12px !important;
-  margin: 0 !important;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-}
+
 
 /* Prevent text overflow */
-.champion-card .champ-info {
-  flex: 1;
-  min-width: 0;
-  font-size: 0.85rem;
-  line-height: 1.2;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+
 
 /* Keep icons consistent */
-.champion-card img.champ-icon {
-  width: 40px !important;
-  height: 40px !important;
-  flex-shrink: 0;
-  border-radius: 4px;
-}
+
 
 :root{
   --page-gutter: 28px;   /* can be tweaked until it visually matches tabs row */
 }
 
 /* the wrapper around the two cards */
-.league-layout{
-  max-width: 1200px;     /* or site’s content max */
-  margin: 0 auto;
-  padding-left: var(--page-gutter);
-  padding-right: var(--page-gutter);
+
+
+
+
+/* === CLEAN LEAGUE LAYOUT — single source of truth === */
+.hero .tab-content{
+  width: 100%;
+  margin-inline: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.hero .tab-content .league-layout{
   display: grid;
   grid-template-columns: clamp(360px, 32vw, 480px) minmax(0,1fr);
   gap: 28px;
   align-items: start;
+  width: 100%;
+}
+.hero .tab-content .league-left{
+  position: sticky;
+  top: 16px;
+}
+.hero .tab-content .league-right{ min-width: 0; }
+
+/* Right card rows */
+.hero .tab-content #summary-row{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+.hero .tab-content #summoner-info{ margin: 0; }
+
+.hero .tab-content #champion-mastery{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 16px;
+  margin: 0;
+}
+.hero .tab-content #champion-mastery > *:nth-child(n+4){ display: none; }
+.hero .tab-content #champion-mastery .champ-card,
+.hero .tab-content #champion-mastery > div{ margin: 0; }
+
+.hero .tab-content #player-insights{ column-count: initial; column-gap: 0; margin: 0; }
+.hero .tab-content #insights-tips{ margin: 0; }
+.hero .tab-content .league-right h4{ margin-top: 0; }
+
+.hero .tab-content .form-actions{
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.hero .tab-content .lookup-submit-btn{
+  width: 100%; height: 44px; display: inline-flex; justify-content: center; align-items: center;
+}
+#insights-message{
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 75%;
+  transform: translateX(-50%);
+  display: inline-block;
+  background: rgba(0,255,100,.12);
+  border: 1px solid rgba(0,255,100,.3);
+  color: #7fffb7;
+  font-size: .85rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+@media (max-width: 900px){
+  .hero .tab-content .league-layout{ grid-template-columns: 1fr; padding-left: 20px; padding-right: 20px; }
+  .hero .tab-content .league-left{ position: static; }
+  #insights-message{ left: 50%; transform: translateX(-50%); }
 }

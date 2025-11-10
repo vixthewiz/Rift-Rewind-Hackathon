@@ -1604,3 +1604,49 @@ footer a{ color: var(--grad-start); }
   height: 0;
   width: 0;
 }
+/* Center Top Champions heading and improve champion layout */
+#summoner-info h4 {
+  text-align: center;
+  width: 100%;
+  margin: 20px 0;
+  font-size: 1.2rem;
+  color: var(--text);
+}
+
+/* Make champion mastery container display champions properly */
+#champion-mastery {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+  gap: 12px;
+  width: 100%;
+  padding: 10px;
+  justify-content: center;
+}
+
+/* Individual champion card adjustments */
+.champion-card {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  width: auto !important;
+  min-width: 0 !important;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+/* Champion icon sizing */
+.champion-card img.champ-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* Champion info text */
+.champion-card .champ-info {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.9rem;
+}

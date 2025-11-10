@@ -1731,3 +1731,48 @@ footer a{ color: var(--grad-start); }
   font-size: 0.8rem;
   line-height: 1.2;
 }
+/* Expand the main container width */
+main {
+  max-width: 1400px !important; /* Increased from 1200px */
+  margin: 0 auto;
+  padding: 48px 20px;
+  position: relative;
+}
+
+/* Make league lookup area use full width */
+.league-lookup {
+  width: 100%;
+  max-width: none;
+  padding: 40px;
+  margin-top: 40px;
+}
+
+/* Adjust the two-column layout to use more space */
+.league-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  width: 100%;
+  max-width: none;
+}
+
+/* Ensure summary row takes full width */
+.summary-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* Make sure columns take full available width */
+.summary-col {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  main {
+    padding: 24px 16px;
+  }
+}

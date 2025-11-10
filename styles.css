@@ -1824,3 +1824,49 @@ main {
 .summary-col {
   width: 100%;
 }
+/* Force single row layout with equal spacing */
+#champion-mastery {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: space-evenly !important; /* Changed to space-evenly */
+  align-items: center !important;
+  gap: 16px;
+  width: 100%;
+  padding: 16px 0;
+}
+
+/* Make cards distribute evenly */
+.champion-card {
+  flex: 1 !important;
+  min-width: 140px !important;
+  max-width: 180px !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 12px !important;
+  margin: 0 !important;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+/* Prevent text overflow */
+.champion-card .champ-info {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.85rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Keep icons consistent */
+.champion-card img.champ-icon {
+  width: 40px !important;
+  height: 40px !important;
+  flex-shrink: 0;
+  border-radius: 4px;
+}

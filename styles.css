@@ -1302,3 +1302,96 @@ main {
   .hero .tab-content .league-left{ position: static; }
   #insights-message{ left: 50%; transform: translateX(-50%); }
 }
+/* ===== Buttons: restore look & keep side-by-side ===== */
+.form-actions{
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 32px; /* space for 'Insights ready!' */
+}
+
+.lookup-submit-btn{
+  /* visual style */
+  background: linear-gradient(180deg, #c9a8ff, #9f7bff);
+  color: #1b102c;
+  border: 0;
+  border-radius: 10px;
+  height: 44px;
+  padding: 0 16px;
+  font-weight: 700;
+  letter-spacing: .2px;
+  box-shadow: 0 6px 18px rgba(123,92,255,0.25);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  /* layout */
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lookup-submit-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(123,92,255,0.32);
+  filter: brightness(1.02);
+}
+
+/* Secondary (Analyze) visual */
+.lookup-submit-btn.secondary{
+  background: linear-gradient(180deg, #ffc36b, #ff8f1f);
+  color: #2a1400;
+  box-shadow: 0 6px 18px rgba(255,143,31,0.28);
+}
+.lookup-submit-btn.secondary:hover{
+  box-shadow: 0 10px 22px rgba(255,143,31,0.36);
+}
+
+/* Disabled keeps size/shape but dims & blocks hover */
+.lookup-submit-btn:disabled{
+  opacity: .55;
+  cursor: not-allowed;
+  filter: grayscale(.15);
+  transform: none;
+  box-shadow: none;
+}
+
+/* ‘Insights ready!’ badge stays below Analyze and never overlaps */
+#insights-message{
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 75%;
+  transform: translateX(-50%);
+  display: inline-block;
+  background: rgba(0,255,100,.12);
+  border: 1px solid rgba(0,255,100,.3);
+  color: #7fffb7;
+  font-size: .85rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+@media (max-width: 900px){
+  #insights-message{ left: 50%; transform: translateX(-50%); }
+}
+
+/* ===== Top Champions: one row, show only 3 ===== */
+/* Some earlier rules set this container to flex column; override decisively */
+#champion-mastery{
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(220px, 1fr)) !important;
+  gap: 16px !important;
+  align-items: start;
+  margin: 0 !important;
+}
+
+/* Hide 4th+ so it’s a clean single line */
+#champion-mastery > *:nth-child(n+4){
+  display: none !important;
+}
+
+/* Remove stray vertical margins on child cards so the grid is tight */
+#champion-mastery .champ-card,
+#champion-mastery > div{
+  margin: 0 !important;
+}

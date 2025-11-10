@@ -1391,3 +1391,38 @@ footer a{ color: var(--grad-start); }
 
 /* Minor polish so sections read as one vertical flow inside the right card */
 .league-right h4{ margin-top: 0; }
+
+/* Adjust the league layout grid */
+.league-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 25%) 1fr; /* Change from 300px to 250px and 25% */
+  gap: 2rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Make the lookup form container more compact */
+.league-left {
+  min-width: 250px; /* Reduced from 300px */
+  padding: 1rem;
+}
+
+/* Give more space to results */
+.league-right {
+  flex: 1;
+  min-width: 0; /* Allows content to shrink below min-width */
+}
+
+/* Adjust the summary row layout */
+.summary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Prevent horizontal scrolling in summary columns */
+.summary-col {
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
